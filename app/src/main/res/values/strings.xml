@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="URL_SERVER">http://10.0.2.2:8080/CollectionPlus</string>
+    <string name="URL_LOGIN">/user/signin.do</string>
+    <string name="URL_REG">/user/signup.do </string>
+    <string name="URL_SENDEMAIL">/user/sendemail.do </string>
+    <string name="URL_GETCOLLECTION">/user/directory.do </string>
 </resources>
