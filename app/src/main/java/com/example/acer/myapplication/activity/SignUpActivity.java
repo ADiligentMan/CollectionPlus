@@ -1,5 +1,6 @@
 package com.example.acer.myapplication.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.acer.myapplication.R;
+import com.example.acer.myapplication.UI_utils.CountDownTimerButton;
 import com.example.acer.myapplication.activity.service.UrlService;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -22,15 +24,17 @@ import com.loopj.android.http.RequestParams;
 
 public class SignUpActivity extends AppCompatActivity {
     //variables defination
-    private Button btnEnsureWord,btnSignup,btnBack;
+    private Button btnSignup,btnBack;
+    private CountDownTimerButton btnEnsureWord;
     private EditText editTextName,editTextpw,editTextemail,editTextEnsureWord,editTextEnsurePw;
     private static final String TAG = "SignUpActivity";
 
+    @SuppressLint("WrongViewCast")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        btnEnsureWord=(Button) findViewById(R.id.buttonEnsureWord);
+        btnEnsureWord=(CountDownTimerButton) findViewById(R.id.buttonEnsureWord);
         btnSignup=(Button)findViewById(R.id.buttonSignup);
         btnBack=(Button)findViewById(R.id.buttonBack);
         editTextName=(EditText) findViewById(R.id.editTextName);
@@ -43,6 +47,7 @@ public class SignUpActivity extends AppCompatActivity {
         btnEnsureWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(SignUpActivity.this, "倒计时开始", Toast.LENGTH_SHORT).show();
                 //发送邮箱并验证验证码
                 ensureWord();
                 //获取验证码
@@ -81,7 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
         //创建参数请求
         RequestParams params = new RequestParams();
-        params.put("emailAddress",emailAddress);
+        params.put("email",emailAddress);
 
         String url = UrlService.getUrl(SignUpActivity.this, R.string.URL_SENDEMAIL);
         asyncHttpClient.post(url,params, new AsyncHttpResponseHandler(){
@@ -92,12 +97,15 @@ public class SignUpActivity extends AppCompatActivity {
 
                 boolean result=jsonObject.getBoolean("success");
                 String info=jsonObject.getString("info");
+                Log.d(TAG, info);
+                Toast.makeText(SignUpActivity.this,info,Toast.LENGTH_SHORT).show();
 
                 if(result){
                     //如果以及发送成功，则让按钮禁用并显示发送
                     //等到cookie过期以后才能重新显示
-//                    buttonEnsureWord.setText("ENSURE WORD HAVE SENT");
-//                    buttonEnsureWord.setEnabled(false);
+                    btnEnsureWord.setText("ENSURE WORD HAVE SENT");
+                    btnEnsureWord.setEnabled(false);
+
                 }
             }
 
@@ -127,10 +135,10 @@ public class SignUpActivity extends AppCompatActivity {
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
         //创建参数请求
         RequestParams params = new RequestParams();
-        params.put("name",editTextNameS);
+        params.put("username",editTextNameS);
         params.put("password",editTextpwS);
-        params.put("emailAddress",editTextemailS);
-        params.put("EnsureWord",editTextEnsureWordS);
+        params.put("email",editTextemailS);
+        params.put("activeCode",editTextEnsureWordS);
 
         String url = UrlService.getUrl(SignUpActivity.this, R.string.URL_REG);
         asyncHttpClient.post(url,params, new AsyncHttpResponseHandler() {

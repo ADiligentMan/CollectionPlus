@@ -1,6 +1,8 @@
 package com.example.acer.myapplication.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -81,7 +83,7 @@ public class LogActivity extends AppCompatActivity {
 
     private void login(){
         //Service request
-        String username=editTextname.getText().toString();
+        final String username=editTextname.getText().toString();
         String password=editTextpassword.getText().toString();
 
         //窗口简单判断是否符合标准
@@ -128,8 +130,8 @@ public class LogActivity extends AppCompatActivity {
                     Toast.makeText(LogActivity.this, info, Toast.LENGTH_SHORT).show();
 
                     //添加到内存中
-//                   SharedPreferences sh=getSharedPreferences("User_demo", Context.MODE_PRIVATE);
-//                    sh.edit().putString("userName",username).commit();
+                   SharedPreferences sh=getSharedPreferences("User_info", Context.MODE_PRIVATE);
+                   sh.edit().putString("userName",username).commit();
 
                     //跳转到收藏夹主界面，并关闭登录界面
                     Intent intent = new Intent(LogActivity.this, MainActivity.class);

@@ -33,10 +33,12 @@ public class ColService {
      */
     public void getFolderName(Context context, Map<String, String> params, final Handler handler, final resultEnd result) {
         MyHttp.setUrl(UrlService.getUrl(context, R.string.URL_GETCOLLECTION));  //设置utl
+        MyHttp.setContext(context);
 
         for (Map.Entry<String, String> entry : params.entrySet()) {                  //设置参数
             MyHttp.setParam(entry.getKey(), entry.getValue());
         }
+
 
         MyHttp.post(new AsyncHttpResponseHandler() {
             @Override

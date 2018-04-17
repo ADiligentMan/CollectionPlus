@@ -48,7 +48,7 @@
                 android:layout_margin="2dp"
                 android:background="@drawable/login_et_bg"
                 android:hint="注册邮箱"
-                android:inputType="textPassword"
+                android:inputType="textEmailAddress"
                 android:padding="5dp" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -57,18 +57,18 @@
 
                 <EditText
                     android:id="@+id/editTextEnsureWord"
-                    android:layout_width="250dp"
+                    android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_margin="2dp"
                     android:layout_weight="4"
                     android:background="@drawable/login_et_bg"
                     android:hint="验证码"
-                    android:inputType="textPassword"
+                    android:inputType="number"
                     android:padding="5dp" />
 
-                <Button
+                <com.example.acer.myapplication.UI_utils.CountDownTimerButton
                     android:id="@+id/buttonEnsureWord"
-                    android:layout_width="100dp"
+                    android:layout_width="200dp"
                     android:layout_height="50dp"
                     android:layout_weight="2"
                     android:text="获取" />

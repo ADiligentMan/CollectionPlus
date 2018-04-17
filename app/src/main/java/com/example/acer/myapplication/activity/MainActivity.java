@@ -1,5 +1,8 @@
 package com.example.acer.myapplication.activity;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -10,15 +13,20 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.annotation.SuppressLint;
 
 import com.example.acer.myapplication.R;
 import com.example.acer.myapplication.activity.service.ColService;
 import com.example.acer.myapplication.activity.service.resultEnd;
+import com.example.acer.myapplication.java_class.Item;
+import com.example.acer.myapplication.java_class.ItemAdapter;
+import com.example.acer.myapplication.java_class.SlideDeleteCancelListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,6 +55,7 @@ public class MainActivity extends AppCompatActivity{
     /**
      * 后端的返回结果
      */
+
     private resultEnd result = new resultEnd();
     //声明相关变量
     private Toolbar toolbar;
@@ -54,10 +63,14 @@ public class MainActivity extends AppCompatActivity{
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView lvLeftMenu;
     private ListView lvRightMenu;
-    private AlertDialog alert_btn;
+//    private AlertDialog alert_btn;
+    private View view;
     //右侧收藏夹栏内容
-    private String[] lvr = {"Item1","Item2","Item3","Item4","Item5"};
+    private String[] lvl = {"List Item 01", "List Item 02", "List Item 03", "List Item 04"};
+        //右侧收藏夹栏内容 Arraylist类型
+    private List<Item> lvr = new ArrayList<Item>();
     //数组容器
+    private Menu menu;
     private ArrayAdapter array_left;
     private ArrayAdapter array_right;
     private ImageView ivRunningMan;
@@ -93,20 +106,25 @@ public class MainActivity extends AppCompatActivity{
         this.setupForColList();
 
         //设置主页面列表
-       array_right = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lvr);
-      lvRightMenu.setAdapter(array_right);
+        initItems();
+        array_right=new ItemAdapter(this,R.layout.item_base,lvr);
+        lvRightMenu.setAdapter(array_right);
 //      alert_dialog();
-
-
     }
 
+//获取所有组件
 
-    private void findViews() {
-      lvRightMenu=(ListView) findViewById(R.id.right_menu);
+
+@SuppressLint("ResourceType")
+private void findViews() {
+        menu=(Menu) findViewById(R.menu.col_tab);
+        view=(View) findViewById(R.id.bottom_navigation);
+        lvRightMenu=(SlideDeleteCancelListView) findViewById(R.id.right_menu);
         toolbar = (Toolbar) findViewById(R.id.tl_custom);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.dl_left);
         lvLeftMenu = (ListView) findViewById(R.id.left_menu);
-    }
+        }//findview
+
 
     /**
      * 从后台请求数据，并给收藏夹列表的adapter设置数据
@@ -119,7 +137,9 @@ public class MainActivity extends AppCompatActivity{
         }
 
         Map<String ,String > map = new HashMap<String ,String >();
-        map.put("username","wangpeng");
+        SharedPreferences sh=getSharedPreferences("User_info", Context.MODE_PRIVATE);
+        String nameFromMemory=sh.getString("userName",null);
+        map.put("username",nameFromMemory);
         //请求数据
         new ColService().getFolderName(this,map,this.handler,result);
 
@@ -186,6 +206,41 @@ public class MainActivity extends AppCompatActivity{
 //      });
 //      builder.show();
 //  }
+
+    //获取右侧列表数据
+    private void initItems() {
+        Item item1=new Item("http://1-----",R.drawable.item1,"2018-4-8","淘宝");
+        lvr.add(item1);
+        Item item2=new Item("http://2-----",R.drawable.btn_back,"2018-4-8","淘宝");
+        lvr.add(item2);
+        Item item3=new Item("http://3-----",R.drawable.item1,"2018-4-8","淘宝");
+        lvr.add(item3);
+        Item item4=new Item("http://4-----",R.drawable.item1,"2018-4-8","淘宝");
+        lvr.add(item4);
+        Item item5=new Item("http://5-----",R.drawable.item1,"2018-4-8","淘宝");
+        lvr.add(item5);
+        Item item6=new Item("http://6-----",R.drawable.item1,"2018-4-8","淘宝");
+        lvr.add(item6);
+        Item item7=new Item("http://7-----",R.drawable.item1,"2018-4-8","淘宝");
+        lvr.add(item7);
+        Item item8=new Item("http://8-----",R.drawable.item1,"2018-4-8","淘宝");
+        lvr.add(item8);
+        Item item9=new Item("http://9-----",R.drawable.item1,"2018-4-8","淘宝");
+        lvr.add(item9);
+        Item item10=new Item("http://10-----",R.drawable.item1,"2018-4-8","淘宝");
+        lvr.add(item10);
+        Item item11=new Item("http://11-----",R.drawable.item1,"2018-4-8","淘宝");
+        lvr.add(item11);
+        Item item12=new Item("http://12-----",R.drawable.item1,"2018-4-8","淘宝");
+        lvr.add(item12);
+        Item item13=new Item("http://13-----",R.drawable.item1,"2018-4-8","淘宝");
+        lvr.add(item13);
+        Item item14=new Item("http://14-----",R.drawable.item1,"2018-4-8","淘宝");
+        lvr.add(item14);
+        Item item15=new Item("http://15-----",R.drawable.item1,"2018-4-8","淘宝");
+        lvr.add(item15);
+
+    }
 
 }
 
