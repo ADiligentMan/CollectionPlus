@@ -1,5 +1,6 @@
 package com.example.acer.myapplication.java_class;
 
+import java.util.Date;
 import java.util.PriorityQueue;
 
 /**
@@ -8,53 +9,90 @@ import java.util.PriorityQueue;
 
 public class Item {
     //定义成员变量
-    private  String link_name;
-    private int link_image;
-    private  String link_time;
-    private String link_package;
-     //构造方法
-    public Item(String link_name,int link_image,String link_time,String link_package) {
-        this.link_name=link_name;
-        this.link_image=link_image;
-        this.link_time=link_time;
-        this.link_package=link_package;
+    private String picPath;
+    private String value;
+    private boolean read;
+    private String title;
+    private String source;
+    private String time;
+    private String type;
+
+    public Item(){}
+    //构造方法
+    public Item(String picPath,String value,boolean read,String title,String source,String time,String type) {
+        this.picPath=picPath;
+        this.value=value;
+        this.read=read;
+        this.title=title;
+        this.source=source;
+        this.time=time;
+        this.type=type;
+
     }
 
-    public Item(String link_name) {
-        this.link_name = link_name;
+    public String getPicPath() {
+        return picPath;
     }
 
-    public String getLink_name() {
-        return link_name;
+    public void setPicPath(String picPath) {
+        this.picPath = picPath;
     }
 
-    public void setLink_name(String link_name) {
-        this.link_name = link_name;
+    public String getValue() {
+        return value;
     }
 
-    public int getLink_image() {
-        return link_image;
+    public void setValue(String value) {
+        this.value = value;
     }
 
-    public void setLink_image(int link_image) {
-        this.link_image = link_image;
+    public boolean isRead() {
+        return read;
     }
 
-    public String getLink_time() {
-        return link_time;
+    public void setRead(boolean read) {
+        this.read = read;
     }
 
-    public void setLink_time(String link_time) {
-        this.link_time = link_time;
+    public String getTitle() {
+        return title;
     }
 
-    public String getLink_package() {
-        return link_package;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setLink_package(String link_package) {
-        this.link_package = link_package;
+    public String getSource() {
+        return source;
     }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+//    public String getDirname() {
+//        return dirname;
+//    }
+//
+//    public void setDirname(String dirname) {
+//        this.dirname = dirname;
+//    }
+
 }
 
 

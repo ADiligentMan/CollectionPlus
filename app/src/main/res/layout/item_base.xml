@@ -13,7 +13,8 @@
         android:layout_alignParentTop="true"
         android:text="此处放置链接标题/链接地址"
         android:textSize="25dp"
-        android:typeface="serif"/>
+        android:typeface="serif"
+        android:clickable="true"/>
 
     <ImageView
         android:id="@+id/link_image"

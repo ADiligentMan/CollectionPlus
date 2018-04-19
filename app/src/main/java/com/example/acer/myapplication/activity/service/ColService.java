@@ -6,11 +6,16 @@ import android.os.Message;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.acer.myapplication.R;
+import com.example.acer.myapplication.java_class.Item;
 import com.example.acer.myapplication.utility.MyHttp;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +27,7 @@ import static com.example.acer.myapplication.activity.BaseActivity.TAG;
 public class ColService {
 
     public final static int GETFOLDERNAME_RESULT_OK = 1;
+    public final static int GETCOLLECTIONINFO_RESULT_OK = 2;
 
     /** 该方法从服务器得到收藏夹名称的列表，并加入到result中的data数据中，
      *  data是List<String>的一个实例。
@@ -32,7 +38,7 @@ public class ColService {
      * @param result 返回结果
      */
     public void getFolderName(Context context, Map<String, String> params, final Handler handler, final resultEnd result) {
-        MyHttp.setUrl(UrlService.getUrl(context, R.string.URL_GETCOLLECTION));  //设置utl
+        MyHttp.setUrl(UrlService.getUrl(context, R.string.URL_GETDIRECTORY));  //设置utl
         MyHttp.setContext(context);
 
         for (Map.Entry<String, String> entry : params.entrySet()) {                  //设置参数
@@ -54,6 +60,7 @@ public class ColService {
                 Log.d(TAG, "onSuccess: " + data);
                 //得到收藏夹名的list
                 List<String> nameList = JSON.parseArray(data, String.class);
+
                 //设置返回结果
                 List<String> list = (List<String>) result.getData();
                 for (int i = 0; i < nameList.size(); i++) {
@@ -77,6 +84,54 @@ public class ColService {
         });
     }
 
+    public void getCollectionInfo(Context context, final Map<String, String> params, final Handler handler, final resultEnd resultCollection){
+        MyHttp.setUrl(UrlService.getUrl(context, R.string.URL_GETCOLLECTION));  //设置utl
+        MyHttp.setContext(context);
+
+        for (Map.Entry<String, String> entry : params.entrySet()) {                  //设置参数
+            MyHttp.setParam(entry.getKey(), entry.getValue());
+        }
+
+        //发送用户名和选中的列表名称
+        //获取item的各项内容
+        MyHttp.post(new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String content) {
+                Log.d("wangpeng", "onSuccess: " + content);
+                //json的反序列化
+                JSONObject jsonObject = JSONObject.parseObject(content);
+                Boolean success = jsonObject.getBoolean("success");
+                String info = jsonObject.getString("info");
+
+                //得到list的json字符串表示
+                String data = jsonObject.getString("data");
+                Log.d(TAG, "onSuccess: " + data);
+
+                //获得的收藏信息结果
+                List<Item> Collectionlist = JSON.parseArray(data,Item.class);
+
+                //设置返回结果
+                List<Item> list=(List<Item>)resultCollection.getData();
+                for(int i=0;i<Collectionlist.size();i++){
+                    list.add(Collectionlist.get(i));
+                }
+
+                resultCollection.setSuccess(success);
+                resultCollection.setInfo(info);
+                //发送消息，通知主线程更新界面。
+                Message message = new Message();
+                message.what = GETCOLLECTIONINFO_RESULT_OK;
+                handler.sendMessage(message);
+            }
+
+            //连接服务器失败
+            @Override
+            public void onFailure(Throwable error, String content) {
+                Log.d("wangpeng", "onFailure: " + content);
+                resultCollection.setAvaibleNet(false);
+            }
+        });
+    }
 
 }
 

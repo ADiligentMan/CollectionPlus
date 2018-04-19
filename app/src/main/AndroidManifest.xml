@@ -42,6 +42,26 @@
        <activity android:name=".activity.MainActivity">        </activity>
         <activity android:name=".activity.SignUpActivity">        </activity>
         <activity android:name=".activity.BaseActivity">        </activity>
+
+        <receiver
+            android:name=".java_class.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":newinst">
+
+            <!-- 静态注册广播 -->
+            <!-- intent过滤器,指定可以匹配哪些intent, 一般需要定义action 可以是自定义的也可是系统的 -->
+            <intent-filter>
+                <!-- action -->
+                <action android:name=".activity.MainActivity" />
+                <action android:name=".activity.RemindActivity"/>
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".activity.RemindActivity"
+            android:theme="@style/Theme.AppCompat.Dialog"/>
+
+
     </application>
 
 </manifest>

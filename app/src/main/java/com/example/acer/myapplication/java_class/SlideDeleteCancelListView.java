@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
+
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -17,8 +19,11 @@ import android.widget.PopupWindow;
 import com.example.acer.myapplication.R;
 
 public class SlideDeleteCancelListView extends ListView  {
+
     private static final String TAG = "SlideDelListView";
+
     private LayoutInflater mInflater = null;
+
     /**
      * 用户滑动的最小距离
      */
@@ -71,14 +76,17 @@ public class SlideDeleteCancelListView extends ListView  {
         super(context, attrs);
 
         mInflater = LayoutInflater.from(context);
-        //用户手指移动的最小距离，用来判断是否响应触发移动事件
+//用户手指移动的最小距离，用来判断是否响应触发移动事件
         touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
 
         View view = mInflater.inflate(R.layout.item_hide,null);
-         //加载所有按钮
+//加载所有按钮
         mDelBtn = (Button) view.findViewById(R.id.item_delete);
+
         mChangeBtn = (Button) view.findViewById(R.id.item_change);
+
         mShareBtn=(Button) view.findViewById(R.id.item_share);
+
         mPopupWindow = new PopupWindow(view,
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -88,18 +96,21 @@ public class SlideDeleteCancelListView extends ListView  {
         mPopupWindow.getContentView().measure(0,0);
         mPopupWindowHeight = mPopupWindow.getContentView().getMeasuredHeight();
         mPopupWindowWidth = mPopupWindow.getContentView().getMeasuredWidth();
+
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+
         int action = ev.getAction();
         int x = (int) ev.getX();
         int y = (int) ev.getY();
+
         switch (action){
             case MotionEvent.ACTION_DOWN:
-                //手指按下时水平方向x的位置
+//手指按下时水平方向x的位置
                 xDown = x;
-                //手指按下时垂直方向y的位置
+//手指按下时垂直方向y的位置
                 yDown = y;
 /*
 * 如果当前popupWindow显示，则直接隐藏，然后屏蔽ListView的Touch事件的下传
@@ -108,19 +119,19 @@ public class SlideDeleteCancelListView extends ListView  {
                     dismissPopWindow();
                     return false;
                 }
-                // 获得当前手指按下时的item的位置
+// 获得当前手指按下时的item的位置
                 mCurrentViewPos = pointToPosition(xDown,yDown);
-                // 获得当前手指按下时的ListView的item项
+// 获得当前手指按下时的ListView的item项
                 mCurrentView = getChildAt(mCurrentViewPos - getFirstVisiblePosition());
                 break;
             case MotionEvent.ACTION_MOVE:
-                //手指移动时x的位置
+//手指移动时x的位置
                 xMove = x;
-                //手指一动时y的位置
+//手指一动时y的位置
                 yMove = y;
-                //水平滑动的距离（可能为负值）
+//水平滑动的距离（可能为负值）
                 int dx = xMove - xDown;
-                //垂直滑动的距离（可能为负值）
+//垂直滑动的距离（可能为负值）
                 int dy = yMove - yDown;
 /*
 * 判断是否是从右到左的滑动
@@ -131,6 +142,7 @@ public class SlideDeleteCancelListView extends ListView  {
                 }
                 break;
         }
+
         return super.dispatchTouchEvent(ev);
     }
 
@@ -234,6 +246,7 @@ public class SlideDeleteCancelListView extends ListView  {
     interface DelButtonClickListener{
         void onDelClick(int position);
     }
+
 
     interface ChangeButtonClickListener{
         void onChangeClick(int position);

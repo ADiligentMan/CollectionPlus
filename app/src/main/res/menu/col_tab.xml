@@ -3,15 +3,15 @@
     <item
         android:id="@+id/item_news"
         android:icon="@mipmap/book"
-        android:title="新闻" />
+        android:title="书签" />
     <item
         android:id="@+id/item_lib"
-        android:icon="@mipmap/find"
-        android:title="图书" />
+
+        android:title="发现" />
     <item
         android:id="@+id/item_find"
-        android:icon="@mipmap/me"
-        android:title="发现" />
+
+        android:title="我的" />
 
 </menu>
 

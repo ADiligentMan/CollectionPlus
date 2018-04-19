@@ -2,9 +2,12 @@ package com.example.acer.myapplication.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,9 +18,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.annotation.SuppressLint;
 
@@ -26,7 +31,7 @@ import com.example.acer.myapplication.activity.service.ColService;
 import com.example.acer.myapplication.activity.service.resultEnd;
 import com.example.acer.myapplication.java_class.Item;
 import com.example.acer.myapplication.java_class.ItemAdapter;
-import com.example.acer.myapplication.java_class.SlideDeleteCancelListView;
+import com.example.acer.myapplication.java_class.SetAlarm;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,14 +54,17 @@ public class MainActivity extends AppCompatActivity{
                case ColService.GETFOLDERNAME_RESULT_OK:
                    getRealData();
                    break;
+               case ColService.GETCOLLECTIONINFO_RESULT_OK:
+                   getRealCollectionData();
+                   break;
            }
         }
     };
     /**
      * 后端的返回结果
      */
-
-    private resultEnd result = new resultEnd();
+    private resultEnd result = new resultEnd();//侧滑栏返回
+    private resultEnd resultCollectiion = new resultEnd();//主界面返回
     //声明相关变量
     private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
@@ -65,16 +73,20 @@ public class MainActivity extends AppCompatActivity{
     private ListView lvRightMenu;
 //    private AlertDialog alert_btn;
     private View view;
-    //右侧收藏夹栏内容
-    private String[] lvl = {"List Item 01", "List Item 02", "List Item 03", "List Item 04"};
-        //右侧收藏夹栏内容 Arraylist类型
-    private List<Item> lvr = new ArrayList<Item>();
+    //右侧收藏夹栏内容 Arraylist类型
+    private ArrayList<Item> lvr = new ArrayList<Item>();
     //数组容器
     private Menu menu;
     private ArrayAdapter array_left;
-    private ArrayAdapter array_right;
+    private ItemAdapter array_right;
+    private AlertDialog alert_btn;
     private ImageView ivRunningMan;
     private AnimationDrawable mAnimationDrawable;
+
+    //其他变量
+    private String dirname="Java";
+    List<String> dirList;
+    List<Item> collectionList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,14 +115,14 @@ public class MainActivity extends AppCompatActivity{
         mDrawerToggle.syncState();
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
+        //设置收藏夹列表栏
         this.setupForColList();
 
         //设置主页面列表
-        initItems();
-        array_right=new ItemAdapter(this,R.layout.item_base,lvr);
-        lvRightMenu.setAdapter(array_right);
+        this.setCollectionList();
 //      alert_dialog();
-    }
+
+}
 
 //获取所有组件
 
@@ -119,18 +131,18 @@ public class MainActivity extends AppCompatActivity{
 private void findViews() {
         menu=(Menu) findViewById(R.menu.col_tab);
         view=(View) findViewById(R.id.bottom_navigation);
-        lvRightMenu=(SlideDeleteCancelListView) findViewById(R.id.right_menu);
+        lvRightMenu=(ListView) findViewById(R.id.right_menu);
         toolbar = (Toolbar) findViewById(R.id.tl_custom);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.dl_left);
         lvLeftMenu = (ListView) findViewById(R.id.left_menu);
         }//findview
 
 
+    //收藏夹界面
     /**
      * 从后台请求数据，并给收藏夹列表的adapter设置数据
      */
     private void setupForColList(){
-
         if(result.getData()==null) {
             List<String> list = new ArrayList<String>();
             result.setData(list);
@@ -142,16 +154,24 @@ private void findViews() {
         map.put("username",nameFromMemory);
         //请求数据
         new ColService().getFolderName(this,map,this.handler,result);
-
-        array_left = new ArrayAdapter(this, android.R.layout.simple_list_item_1, (List<String>) result.getData());
+        dirList=(List<String>) result.getData();
+        array_left = new ArrayAdapter(this, android.R.layout.simple_list_item_1,dirList);
         lvLeftMenu.setAdapter(array_left);
+        lvLeftMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                dirname=dirList.get(i);
+                ((List<Item>) resultCollectiion.getData()).clear();
+                Toast.makeText(MainActivity.this, dirname, Toast.LENGTH_SHORT).show();
+                setCollectionList();
+            }
+        });
     }
 
     /**
-     * 当子线程返回数据时，在handler调用，更新界面
+     * 当子线程返回数据时，在handler调用，更新收藏夹列表界面
      */
     private void getRealData(){
-
         array_left.notifyDataSetChanged();
         if(!result.isAvaibleNet()){//网络访问出错
             Toast.makeText(MainActivity.this, "服务器登录接口调用失败", Toast.LENGTH_SHORT).show();
@@ -207,42 +227,55 @@ private void findViews() {
 //      builder.show();
 //  }
 
-    //获取右侧列表数据
-    private void initItems() {
-        Item item1=new Item("http://1-----",R.drawable.item1,"2018-4-8","淘宝");
-        lvr.add(item1);
-        Item item2=new Item("http://2-----",R.drawable.btn_back,"2018-4-8","淘宝");
-        lvr.add(item2);
-        Item item3=new Item("http://3-----",R.drawable.item1,"2018-4-8","淘宝");
-        lvr.add(item3);
-        Item item4=new Item("http://4-----",R.drawable.item1,"2018-4-8","淘宝");
-        lvr.add(item4);
-        Item item5=new Item("http://5-----",R.drawable.item1,"2018-4-8","淘宝");
-        lvr.add(item5);
-        Item item6=new Item("http://6-----",R.drawable.item1,"2018-4-8","淘宝");
-        lvr.add(item6);
-        Item item7=new Item("http://7-----",R.drawable.item1,"2018-4-8","淘宝");
-        lvr.add(item7);
-        Item item8=new Item("http://8-----",R.drawable.item1,"2018-4-8","淘宝");
-        lvr.add(item8);
-        Item item9=new Item("http://9-----",R.drawable.item1,"2018-4-8","淘宝");
-        lvr.add(item9);
-        Item item10=new Item("http://10-----",R.drawable.item1,"2018-4-8","淘宝");
-        lvr.add(item10);
-        Item item11=new Item("http://11-----",R.drawable.item1,"2018-4-8","淘宝");
-        lvr.add(item11);
-        Item item12=new Item("http://12-----",R.drawable.item1,"2018-4-8","淘宝");
-        lvr.add(item12);
-        Item item13=new Item("http://13-----",R.drawable.item1,"2018-4-8","淘宝");
-        lvr.add(item13);
-        Item item14=new Item("http://14-----",R.drawable.item1,"2018-4-8","淘宝");
-        lvr.add(item14);
-        Item item15=new Item("http://15-----",R.drawable.item1,"2018-4-8","淘宝");
-        lvr.add(item15);
+    //收藏信息界面
+    /**
+     从     *后台请求数据，并给收藏夹主界面列表的adapter设置数据
+     */
+    private void setCollectionList(){
+        if(resultCollectiion.getData()==null) {
+            List<Item> itemList=new ArrayList<Item>();
+            resultCollectiion.setData(itemList);
+        }
+        Map<String ,String > mapCollection = new HashMap<String ,String >();
+        SharedPreferences sh=getSharedPreferences("User_info", Context.MODE_PRIVATE);
+        String nameFromMemory=sh.getString("userName",null);
+        mapCollection.put("username",nameFromMemory);
+        mapCollection.put("dirname",dirname);
 
+        //请求数据
+        new ColService().getCollectionInfo(this,mapCollection,this.handler,resultCollectiion);
+        collectionList= (List<Item>) resultCollectiion.getData();
+        array_right = new ItemAdapter(this,R.layout.item, collectionList);
+        lvRightMenu.setAdapter(array_right);
+
+        //响应事件，打开相应的网页
+        lvRightMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(collectionList.get(i).getValue()));
+                startActivity(intent);
+                Toast.makeText(MainActivity.this, collectionList.get(i).getValue(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        array_right.notifyDataSetChanged();
+    }
+    /**
+     * 当子线程返回数据时，在handler调用，更新收藏信息主界面
+     */
+    private void getRealCollectionData(){
+        if(!resultCollectiion.isAvaibleNet()){//网络访问出错
+            Toast.makeText(MainActivity.this, "服务器登录接口调用失败", Toast.LENGTH_SHORT).show();
+        }else if(resultCollectiion.isSuccess()){
+            Toast.makeText(MainActivity.this,resultCollectiion.getInfo(), Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(MainActivity.this, resultCollectiion.getInfo(), Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
+
 
 
 
