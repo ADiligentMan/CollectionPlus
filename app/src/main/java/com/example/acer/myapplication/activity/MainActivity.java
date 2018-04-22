@@ -26,18 +26,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.annotation.SuppressLint;
 
 import com.example.acer.myapplication.R;
 import com.example.acer.myapplication.activity.service.ColService;
 import com.example.acer.myapplication.activity.service.resultEnd;
 import com.example.acer.myapplication.java_class.Item;
 import com.example.acer.myapplication.java_class.ItemAdapter;
-import com.example.acer.myapplication.java_class.SetAlarm;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -218,6 +217,15 @@ public class MainActivity extends AppCompatActivity{
         contentView.setLayoutParams(layoutParams);
         bottomDialog.getWindow().setGravity(Gravity.BOTTOM);
         bottomDialog.getWindow().setWindowAnimations(R.style.BottomDialog_Animation);
+
+        // ok的监听事件
+        Button okBtn = contentView.findViewById(R.id.save);
+        okBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "save", Toast.LENGTH_SHORT).show();
+            }
+        });
         bottomDialog.show();
     }
 

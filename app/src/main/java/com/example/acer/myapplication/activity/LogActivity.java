@@ -81,10 +81,7 @@ public class LogActivity extends AppCompatActivity {
         });
     }
 
-    private void login(){
-        Intent intent = new Intent(LogActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+    private void login() {
         //Service request
         final String username=editTextname.getText().toString();
         String password=editTextpassword.getText().toString();
@@ -145,6 +142,10 @@ public class LogActivity extends AppCompatActivity {
                     //“用户名错误”
                     //“密码错误”
                     Toast.makeText(LogActivity.this, info, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LogActivity.this, "登录失败，为了测试仍然跳转到MainActivity", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(LogActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
 
