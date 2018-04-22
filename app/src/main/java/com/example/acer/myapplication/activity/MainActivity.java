@@ -1,6 +1,9 @@
 package com.example.acer.myapplication.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,8 +19,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -122,7 +128,98 @@ public class MainActivity extends AppCompatActivity{
         this.setCollectionList();
 //      alert_dialog();
 
-}
+        // 检测剪切板是否变化
+        detectClipBoard();
+
+        // 注册剪切板监听
+        setClipBoard();
+
+        // 如果是分享链接到收藏加
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+        if (Intent.ACTION_SEND.equals(action) && type != null) {
+            if ("text/plain".equals(type)) {
+                // handleSendText(intent); // Handle text being sent
+                String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+                showbottom(sharedText);
+            }
+        }
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        detectClipBoard();
+    }
+
+
+
+    // 检测剪切板是否变化
+    private void detectClipBoard() {
+        // 剪切板是否变化
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        Boolean isClipchange = sharedPref.getBoolean(getString(R.string.isClipChange), false);
+
+        if (isClipchange) {
+            String newCopy = sharedPref.getString(getString(R.string.newCopy), null);
+            showbottom(newCopy);
+        }
+    }
+
+    // 注册剪切板监听
+    private void setClipBoard() {
+        String oldCopy = "";
+        final ClipboardManager clipBoard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        clipBoard.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
+
+            // 剪切板发生变化的事件监听
+            @Override
+            public void onPrimaryClipChanged() {
+                ClipData clipData = clipBoard.getPrimaryClip();
+                ClipData.Item item = clipData.getItemAt(0);
+                String newCopy = item.getText().toString();
+
+                // 设置剪切板已更新的标志位，并将新复制的内容也存入sharedPreferences
+                SharedPreferences sharedPref = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+
+                editor.putBoolean(getString(R.string.isClipChange), true);
+                editor.putString(getString(R.string.newCopy), newCopy);
+
+                editor.commit();
+
+                // Access your context here using YourActivityName.this
+//                textView.setText(text);
+            }
+        });
+    }
+
+    private String getNewCopy() {
+        // TODO 新获取的剪切板与之前存储的剪切板内容比较
+        return null;
+    }
+
+
+    //显示底部悬浮窗
+    private void showbottom(String text) {
+        Dialog bottomDialog = new Dialog(this, R.style.BottomDialog);
+        View contentView = LayoutInflater.from(this).inflate(R.layout.bottomdialog, null);
+
+        TextView textView = contentView.findViewById(R.id.newCopy);
+        textView.setText(text);
+
+        bottomDialog.setContentView(contentView);
+        ViewGroup.LayoutParams layoutParams = contentView.getLayoutParams();
+        layoutParams.width = getResources().getDisplayMetrics().widthPixels;
+        contentView.setLayoutParams(layoutParams);
+        bottomDialog.getWindow().setGravity(Gravity.BOTTOM);
+        bottomDialog.getWindow().setWindowAnimations(R.style.BottomDialog_Animation);
+        bottomDialog.show();
+    }
 
 //获取所有组件
 

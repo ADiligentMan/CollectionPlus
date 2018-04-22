@@ -22,4 +22,7 @@
         completions."
     </string>
 
+    <string name="isClipChange">isClipChange</string>
+    <string name="newCopy">newCopy</string>
+
 </resources>

@@ -82,6 +82,9 @@ public class LogActivity extends AppCompatActivity {
     }
 
     private void login(){
+        Intent intent = new Intent(LogActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
         //Service request
         final String username=editTextname.getText().toString();
         String password=editTextpassword.getText().toString();

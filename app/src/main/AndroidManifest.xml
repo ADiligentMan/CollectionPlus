@@ -39,7 +39,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-       <activity android:name=".activity.MainActivity">        </activity>
+       <activity android:name=".activity.MainActivity">
+           <intent-filter>
+               <action android:name="android.intent.action.SEND" />
+               <category android:name="android.intent.category.DEFAULT" />
+               <data android:mimeType="text/plain" />
+           </intent-filter>
+       </activity>
         <activity android:name=".activity.SignUpActivity">        </activity>
         <activity android:name=".activity.BaseActivity">        </activity>
 
