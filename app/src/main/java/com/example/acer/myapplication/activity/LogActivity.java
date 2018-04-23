@@ -154,6 +154,10 @@ public class LogActivity extends AppCompatActivity {
             public void onFailure(Throwable error, String content) {
                 Log.d("wangpeng", "onFailure: "+ content);
                 Toast.makeText(LogActivity.this, "服务器登录接口调用失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LogActivity.this, "登录失败，为了测试仍然跳转到MainActivity", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(LogActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
