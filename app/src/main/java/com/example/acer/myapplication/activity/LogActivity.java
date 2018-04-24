@@ -1,6 +1,8 @@
 package com.example.acer.myapplication.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,14 +17,6 @@ import com.example.acer.myapplication.activity.service.UrlService;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-
-import java.io.IOException;
-
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 
 /**
@@ -79,9 +73,9 @@ public class LogActivity extends AppCompatActivity {
         });
     }
 
-    private void login(){
+    private void login() {
         //Service request
-        String username=editTextname.getText().toString();
+        final String username=editTextname.getText().toString();
         String password=editTextpassword.getText().toString();
 
         //窗口简单判断是否符合标准
@@ -106,6 +100,7 @@ public class LogActivity extends AppCompatActivity {
 
 
       String url = UrlService.getUrl(LogActivity.this, R.string.URL_LOGIN);
+
         Log.d("wangpeng", "login: "+url);
 
         //发送请求
@@ -128,8 +123,8 @@ public class LogActivity extends AppCompatActivity {
                     Toast.makeText(LogActivity.this, info, Toast.LENGTH_SHORT).show();
 
                     //添加到内存中
-//                   SharedPreferences sh=getSharedPreferences("User_demo", Context.MODE_PRIVATE);
-//                    sh.edit().putString("userName",username).commit();
+                    SharedPreferences sh = getSharedPreferences("User_info", Context.MODE_PRIVATE);
+                    sh.edit().putString("userName",username).commit();
 
                     //跳转到收藏夹主界面，并关闭登录界面
                     Intent intent = new Intent(LogActivity.this, MainActivity.class);
@@ -140,6 +135,10 @@ public class LogActivity extends AppCompatActivity {
                     //“用户名错误”
                     //“密码错误”
                     Toast.makeText(LogActivity.this, info, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LogActivity.this, "登录失败，为了测试仍然跳转到MainActivity", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(LogActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
 
@@ -148,41 +147,15 @@ public class LogActivity extends AppCompatActivity {
             public void onFailure(Throwable error, String content) {
                 Log.d("wangpeng", "onFailure: "+ content);
                 Toast.makeText(LogActivity.this, "服务器登录接口调用失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LogActivity.this, "登录失败，为了测试仍然跳转到MainActivity", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(LogActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
     }
 
-
-
-    private void login2(){
-
-
-
-
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    String url = UrlService.getUrl(LogActivity.this, R.string.URL_LOGIN);
-                    Log.d("wangpeng", "run: "+url);
-                    OkHttpClient client = new OkHttpClient();
-                    RequestBody requestBody = new FormBody.Builder().add("username","wangpeng").add("password","Wp336358").build();
-                    Request request = new Request.Builder().url(url).post(requestBody).build();
-                    Response response = client.newCall(request).execute();
-                    if(response.isSuccessful()){
-                        String string = response.body().string();
-                        Log.d("wangpeng", "login: "+string);
-                    }
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-
-    }
     //进行一些窗口信息的简单判断
     private boolean validate(){
 //        用户名：不为空

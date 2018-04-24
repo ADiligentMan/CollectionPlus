@@ -42,4 +42,5 @@ dependencies {
     implementation files('libs/fastjson-1.1.33-sources.jar')
     implementation files('libs/okhttp-3.0.0.jar')
     implementation files('libs/okio-1.6.0.jar')
+    implementation files('libs/jsoup-1.11.3.jar')
 }
