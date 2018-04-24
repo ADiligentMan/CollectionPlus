@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--列表项隐藏布局-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    xmlns="D:\android\CollectionPlus-master\app\src\main\res\layout\item_hide.xml">
+
+    <Button
+        android:id="@+id/item_change"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:text="更改分类"
+        android:background="#8B8B7A"
+        android:textColor="#ffffff"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        />
+
+    <Button
+    android:id="@+id/item_delete"
+    android:layout_width="60dp"
+    android:layout_height="100dp"
+    android:text="删除"
+    android:background="#698B22"
+    android:textColor="#ffffff"
+    android:layout_alignParentRight="true"
+    android:layout_centerVertical="true"
+    />
+    <Button
+        android:id="@+id/item_share"
+        android:layout_width="60dp"
+        android:layout_height="100dp"
+        android:text="分享"
+        android:background="#FFC125"
+        android:textColor="#ffffff"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        />
+</LinearLayout>
