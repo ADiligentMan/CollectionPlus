@@ -1,0 +1,34 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- 底部导航栏样式-->
+    <style name="CustomRadioBtn">
+        <item name="android:gravity">center</item>
+        <item name="android:background"> @drawable/radiobtn_background</item>
+        <item name="android:button">@null</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/radio_color_selector</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <!-- 每个link按钮的的样式-->
+    <style name="BtnsOfLink">
+        <item name="android:background">@drawable/bg_link_btn</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">11dp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+</resources>
