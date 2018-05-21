@@ -1,0 +1,27 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:variablePadding="true">
+    <!-- 第一种加载方式 -->
+    <!--<item android:drawable="@drawable/bg_tab_selected" android:state_checked="true" />-->
+    <!-- 第二种加载方式 -->
+    <item android:state_checked="true"  >
+        <layer-list>
+            <!-- 红色底 -->
+            <item  android:top="0dp" >
+                <color android:color="#E4007F" />
+            </item>
+            <!-- 白色背景 -->
+            <item android:top="4dp" android:drawable="@android:color/white" />
+        </layer-list>
+    </item>
+
+    <item >
+        <layer-list>
+            <item android:top="2.5dp">
+                <color android:color="#E4007F" />
+            </item>
+            <item android:top="4dp">
+                <color android:color="@android:color/white" />
+            </item>
+        </layer-list>
+    </item>
+</selector>

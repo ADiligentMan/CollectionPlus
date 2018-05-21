@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="dirname"
+            type="String"/>
+        <variable
+            name="time"
+            type="String"/>
+        <variable
+            name="mView"
+            type="com.example.acer.collectionplus.View.IMainFragmentView"/>
+        <variable
+            name="position"
+            type="int"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/pressed_selector"
+        android:orientation="horizontal"
+        android:onClick="@{()->mView.changeDir(dirname,position)}"
+        android:paddingHorizontal="10dp">
+
+        <TextView
+            android:padding="5dp"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:drawableLeft="@drawable/directory"
+            android:gravity="center_vertical"
+            android:drawablePadding="30dp"
+            android:text="@{dirname}"
+            tools:text="Java"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:layout_height="match_parent"
+            android:gravity="end|bottom"
+           tools:text="2015-1-3;"
+            android:text="@{time}" />
+    </LinearLayout>
+</layout>

@@ -1,0 +1,133 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.example.acer.collectionplus.R"/>
+        <import type="android.view.View"/>
+        <variable
+            name="mBean"
+            type="com.example.acer.collectionplus.JavaBean.SimpleLinkBean"/>
+        <variable
+            name="mAdapter"
+            type="com.example.acer.collectionplus.Adapter.LinkAdapter"/>
+        <variable
+            name="position"
+            type="int"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:onClick="@{()->mAdapter.clickLink(mBean.value,position)}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2.5dp"
+                android:layout_weight="3"
+                android:text="@{mBean.title}"
+                android:textColor="@color/colorBlack"
+                android:textSize="36px"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/iv_thumnail"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="2.5dp"
+                android:layout_weight="2"
+                android:scaleType="fitXY"
+                tools:src="@mipmap/ic_launcher"
+                app:imageUrl="@{mBean.picPath}"
+               />
+            <!--app:imageUrl="@{mBean.picPath}"-->
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@{mBean.time}"
+            tools:text="2017-4-1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linear" />
+
+        <TextView
+            android:id="@+id/tv_dir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@{mBean.dirname}"
+            tools:text="Java"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linear" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:background="@drawable/arrow_selector"
+            android:onClick="@{()->mAdapter.clickSmallTtiangle(position)}"
+            android:background="@{mBean.isGone? @drawable/arrow_selector:@drawable/arrow_selector2}"
+            app:layout_constraintLeft_toRightOf="@id/tv_time"
+            app:layout_constraintRight_toLeftOf="@id/tv_dir"
+            app:layout_constraintTop_toBottomOf="@id/linear" />
+
+        <LinearLayout
+            android:id="@+id/btns_hide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            tools:visibility="visible"
+            android:visibility="@{mBean.isGone ?View.GONE:View.VISIBLE}"
+            app:layout_constraintTop_toBottomOf="@id/tv_dir">
+
+
+            <CheckBox
+                android:id="@+id/cb_isread"
+                style="@style/BtnsOfLink"
+                android:focusable="false"
+                android:gravity="center"
+                android:text="未读" />
+
+            <Button
+                android:id="@+id/btn_note"
+                style="@style/BtnsOfLink"
+                android:drawableTop="@drawable/btn_note"
+                android:text="笔记" />
+
+            <Button
+                android:id="@+id/btn_delete"
+                style="@style/BtnsOfLink"
+                android:drawableTop="@drawable/btn_delete"
+                android:text="删除" />
+
+            <Button
+                android:id="@+id/btn_share"
+                style="@style/BtnsOfLink"
+                android:drawableTop="@drawable/btn_share"
+                android:text="分享" />
+
+            <Button
+                android:id="@+id/btn_clock"
+                style="@style/BtnsOfLink"
+                android:drawableTop="@drawable/btn_clock"
+                android:text="定时" />
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>
