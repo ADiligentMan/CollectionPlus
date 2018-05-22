@@ -4,7 +4,6 @@ import com.example.acer.collectionplus.Constant.URLConstant;
 import com.example.acer.collectionplus.JavaBean.DirBean;
 import com.example.acer.collectionplus.JavaBean.LinkBean;
 
-
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
