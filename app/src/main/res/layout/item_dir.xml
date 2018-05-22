@@ -32,7 +32,7 @@
             android:layout_weight="3"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:drawableLeft="@drawable/directory"
+            android:drawableLeft="@drawable/ajust_directory2"
             android:gravity="center_vertical"
             android:drawablePadding="30dp"
             android:text="@{dirname}"
@@ -45,7 +45,7 @@
             android:padding="5dp"
             android:layout_height="match_parent"
             android:gravity="end|bottom"
-           tools:text="2015-1-3;"
+            tools:text="2015-1-3;"
             android:text="@{time}" />
     </LinearLayout>
 </layout>

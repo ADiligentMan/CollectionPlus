@@ -171,12 +171,36 @@ public class AnalyzeHtml {
         try {
             Document doc = Jsoup.connect(htmlUrl).get();
             Elements pngs = doc.select("img[src$=.jpg]");
+            if(pngs.size()==0)
+                return GetPNGPath(htmlUrl);
             int num = pngs.size()/2;
             res = pngs.get(num).attr("src");
             //for (Element element : pngs) {
                 //Bitmap bitmap = getHttpBitmap(element.attr("src"));//从网络获取图片
                 //res = saveBitmap(bitmap);//保存图片到图库
                 //res = getHtmlImages(element.attr("src"));
+//                if(!res.equals("null"))
+//                    break;
+//            }
+            //res = getHtmlImages(pngs.attr("src"));
+        } catch (IOException e) {
+            //e.printStackTrace();
+        }
+        return res;
+    }
+    public String GetPNGPath(String htmlUrl) {
+        String res ="null";
+        try {
+            Document doc = Jsoup.connect(htmlUrl).get();
+            Elements pngs = doc.select("img[src$=.png]");
+            if(pngs.size()==0)
+                return res;
+            int num = pngs.size()/2;
+            res = pngs.get(num).attr("src");
+            //for (Element element : pngs) {
+            //Bitmap bitmap = getHttpBitmap(element.attr("src"));//从网络获取图片
+            //res = saveBitmap(bitmap);//保存图片到图库
+            //res = getHtmlImages(element.attr("src"));
 //                if(!res.equals("null"))
 //                    break;
 //            }

@@ -3,7 +3,7 @@ package com.example.acer.collectionplus.RetrofitInterface;
 import com.example.acer.collectionplus.Constant.URLConstant;
 import com.example.acer.collectionplus.JavaBean.DirBean;
 import com.example.acer.collectionplus.JavaBean.LinkBean;
-import com.example.acer.collectionplus.R;
+
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

@@ -28,4 +28,10 @@ public class TimeHelper {
         return  strTarget;
     }
 
+    public static String getFormatedTime(Date date){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return  sdf.format(date);
+    }
+
+
 }

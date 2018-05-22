@@ -58,8 +58,8 @@ public class LinkModel implements ILinkModel {
                             for (LinkBean.Entity entity : entities) {
                                 String picPath = entity.getPicPath();
                                 if(picPath==null){
-                                     picPath = new  AnalyzeHtml().GetPath(entity.getValue());
-                                     entity.setPicPath(picPath);
+                                    picPath = new  AnalyzeHtml().GetPath(entity.getValue());
+                                    entity.setPicPath(picPath);
                                 }
                             }
                         }
@@ -84,7 +84,8 @@ public class LinkModel implements ILinkModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.i(TAG, "onError: "+e.getMessage());
+                        e.printStackTrace();
+                        Log.i(TAG, "onError: "+e.getLocalizedMessage());
                         loadListener.loadFailure(e.getMessage());
                     }
 
