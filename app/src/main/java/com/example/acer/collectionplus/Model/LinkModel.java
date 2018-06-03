@@ -59,6 +59,7 @@ public class LinkModel implements ILinkModel {
                                 String picPath = entity.getPicPath();
                                 if(picPath==null){
                                     picPath = new  AnalyzeHtml().GetPath(entity.getValue());
+                                    Log.d(TAG, "apply: "+picPath);
                                     entity.setPicPath(picPath);
                                 }
                             }
@@ -126,6 +127,7 @@ public class LinkModel implements ILinkModel {
                 slb.time.set(time);
                 slb.isGone.set(true);
                 simpleLinkbeanList.add(slb);
+                Log.d(TAG, "Link_onNext: "+slb.title.get());
             }
         }
     }

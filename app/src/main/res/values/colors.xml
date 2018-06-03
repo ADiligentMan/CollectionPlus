@@ -7,4 +7,6 @@
     <color name="colorDeepBlue">#0a1d84</color>
     <color name="colorGray">#d89a9797</color>
     <color name="colorShadowGray">#B5B5B5</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorCeHuaLan">#f6e6e4e4</color>
 </resources>

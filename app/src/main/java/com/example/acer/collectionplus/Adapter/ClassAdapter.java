@@ -24,6 +24,7 @@ public class ClassAdapter extends BaseAdapter<SimpleDirBean,BaseViewHolder> {
         ViewDataBinding binding = DataBindingUtil.inflate(inflater,R.layout.item_classify,parent,false);
         BaseViewHolder holder = new BaseViewHolder(binding);
         return holder;
+
     }
 
     @Override

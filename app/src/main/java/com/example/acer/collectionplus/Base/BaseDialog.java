@@ -22,6 +22,8 @@ public abstract class BaseDialog<T extends  Dialog> {
         }
     }
 
+
+
     /**
      * 关闭加载框
      */
@@ -35,4 +37,5 @@ public abstract class BaseDialog<T extends  Dialog> {
      *  创建一个dialog
      */
     protected abstract void createDialog(String msg);
+
 }

@@ -1,6 +1,7 @@
 package com.example.acer.collectionplus.Helper;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -26,8 +27,11 @@ import java.util.List;
  */
 
 public class DialogHelper {
+    //dialog的类型。1加载框，2添加链接框，3确认框，4重命名框
     public static  final int LOAD_DIALOG = 1;
     public static final int ADD_DIALOG =2;
+    public static final int CONFIRM_DIALOG=3;
+    public static final int RENAME_DIALOG=4;
     public static DialogHelper getInstance() {
         return DialogHelper.instance;
     }
@@ -104,8 +108,7 @@ public class DialogHelper {
             mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
-                    dialog.dismiss();
-                    mDialog = null;
+                    closeSelf();
                 }
             });
 
@@ -128,8 +131,7 @@ public class DialogHelper {
             cancelBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    DialogHelper.getInstance().close();
+                    closeSelf();
                 }
             });
             okBtn.setOnClickListener(new View.OnClickListener() {
@@ -142,7 +144,6 @@ public class DialogHelper {
 
         }
     }
-
 
 }
 

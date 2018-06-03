@@ -12,7 +12,8 @@ public class BindingAdapter {
 
     @android.databinding.BindingAdapter({"imageUrl"})
     public static void loadImage(ImageView iv, String url) {
-        if(url == null) iv.setBackgroundResource(R.drawable.bg_no_image);
+        if(url == null) {iv.setBackgroundResource(R.drawable.bg_no_image); return;}
         Glide.with(iv.getContext()).load(url).into(iv);
     }
+
 }

@@ -28,6 +28,7 @@ public class AddVM implements AddLoadListener<SimpleDirBean>{
     private AddModel model;
     private ActivityAddBinding binding;
     private DataToShow data;
+    LinkBean.Entity entity = new LinkBean.Entity();
 
     public AddVM (ClassAdapter mAdapter, IAddView mView , ActivityAddBinding binding,String content){
         this.mView = mView;
@@ -62,12 +63,20 @@ public class AddVM implements AddLoadListener<SimpleDirBean>{
         }
     }
 
+    /**
+     * model成功加载链接标题和链接图片地址。
+     * @param list
+     */
     @Override
-    public void loadSuccessForTitle(String title) {
-        binding.etTitle.setText(title);
-        this.data.title.set(title);
+    public void loadSuccessForPathAndTitle(List<String> list) {
+        binding.etTitle.setText(list.get(0));
+        this.entity.setPicPath(list.get(1));
     }
 
+    /**
+     * model,成功加载收藏夹列表
+     * @param list
+     */
     @Override
     public void loadSuccess(List<SimpleDirBean> list) {
         mAdapter.refreshData(list);
@@ -92,10 +101,9 @@ public class AddVM implements AddLoadListener<SimpleDirBean>{
      * 保存链接
      */
     public void saveLink(){
-        LinkBean.Entity entity = new LinkBean.Entity();
+
         entity.setValue(content);
         if(isLink) {
-            entity.setPicPath(null);
             entity.setDirname(mAdapter.getCheckedName());
             entity.setRead(false);
             entity.setSource("QQ");

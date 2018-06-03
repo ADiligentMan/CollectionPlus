@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
    public static final String TAG ="MainActivity";
     ActivityMainBinding binding;
     MainFragment mainFragment;
+    UserFragment userFragment;
     MainVM mainVM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.bottom_link:
                         break;
                     case R.id.bottom_mime:
+                        userFragment  = userFragment == null?new UserFragment():userFragment;
+                        fragment = userFragment;
                         break;
                 }
                 replaceFragment(fragment);

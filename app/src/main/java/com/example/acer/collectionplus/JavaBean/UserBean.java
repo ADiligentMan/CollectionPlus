@@ -1,6 +1,7 @@
 package com.example.acer.collectionplus.JavaBean;
 
 import com.example.acer.collectionplus.Base.BaseBean;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by asus on 2018/5/19.
@@ -20,6 +21,7 @@ public class UserBean extends BaseBean<UserBean.Entity> {
         private String age;
         private String sharenumber;
         private String likenumber;
+        @SerializedName("fannumber")
         private String funnumber;
         private String sourcenumber;
         private String notenumber;

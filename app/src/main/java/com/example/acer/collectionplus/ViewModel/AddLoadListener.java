@@ -3,7 +3,8 @@ package com.example.acer.collectionplus.ViewModel;
 import com.example.acer.collectionplus.Base.BaseLoadListener;
 import com.example.acer.collectionplus.JavaBean.SimpleDirBean;
 
-public interface AddLoadListener<T> extends BaseLoadListener<T>{
+import java.util.List;
 
-    void loadSuccessForTitle(String title);
+public interface AddLoadListener<T> extends BaseLoadListener<T>{
+    void loadSuccessForPathAndTitle(List<String> list);
 }

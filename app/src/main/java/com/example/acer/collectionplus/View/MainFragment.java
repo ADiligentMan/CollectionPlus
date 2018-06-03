@@ -52,7 +52,7 @@ public class MainFragment extends Fragment implements IMainFragmentView {
         binding.xrvLink.setRefreshProgressStyle(ProgressStyle.BallClipRotate);
         binding.xrvLink.setLoadingMoreProgressStyle(ProgressStyle.BallClipRotate);
         binding.xrvLink.setArrowImageView(R.drawable.pull_down_arrow);
-        binding.xrvLink.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+        //binding.xrvLink.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         binding.xrvLink.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -74,7 +74,6 @@ public class MainFragment extends Fragment implements IMainFragmentView {
 
     private void initDirRecyclView() {
         binding.xrvDir.setRefreshProgressStyle(ProgressStyle.BallClipRotate);
-        binding.xrvDir.addItemDecoration(new  DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         binding.xrvDir.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -139,8 +138,12 @@ public class MainFragment extends Fragment implements IMainFragmentView {
      * @param position 收藏夹位置
      */
     @Override
-    public void changeDir(String dirname, int position) {
-
+    public void changeDir(View view,String dirname, int position) {
+        if(dirAdapter.getStatus()==DirAdapter.OPEN){
+            dirAdapter.colseItemMenu();
+            dirAdapter.setStatus(DirAdapter.CLOSE);
+            return;
+        }
         linkVM.onChangeDir(dirname, position);
     }
 }
