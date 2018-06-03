@@ -7,7 +7,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
     <!-- 底部导航栏样式-->
     <style name="CustomRadioBtn">
         <item name="android:gravity">center</item>
@@ -30,5 +29,6 @@
         <item name="android:textSize">11dp</item>
         <item name="android:textAlignment">center</item>
     </style>
+
 
 </resources>
