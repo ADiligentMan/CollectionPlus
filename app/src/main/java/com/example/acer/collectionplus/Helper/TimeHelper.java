@@ -8,14 +8,14 @@ public class TimeHelper {
 
 
     /**
-     * 格式转换：yyyy-MM-dd HH:mm:ss -> yyyy-MM-dd
+     * 格式转换：yyyy-MM-dd HH:mm:ss -> MM-dd
      * @param time 需要格式化的时间。
      * @return
      */
     public static String getFormatedTime(String time){
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            SimpleDateFormat target = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat target = new SimpleDateFormat("MM-dd");
             String strTarget="";
 
             try {
@@ -27,5 +27,16 @@ public class TimeHelper {
 
         return  strTarget;
     }
+
+    /**
+     * 把Date转化为 yyyy-MM-dd HH:mm:ss的格式
+     * @param date
+     * @return
+     */
+    public static String getFormatedTime(Date date){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return  sdf.format(date);
+    }
+
 
 }

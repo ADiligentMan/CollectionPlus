@@ -58,8 +58,9 @@ public class LinkModel implements ILinkModel {
                             for (LinkBean.Entity entity : entities) {
                                 String picPath = entity.getPicPath();
                                 if(picPath==null){
-                                     picPath = new  AnalyzeHtml().GetPath(entity.getValue());
-                                     entity.setPicPath(picPath);
+                                    picPath = new  AnalyzeHtml().GetPath(entity.getValue());
+                                    Log.d(TAG, "apply: "+picPath);
+                                    entity.setPicPath(picPath);
                                 }
                             }
                         }
@@ -84,7 +85,8 @@ public class LinkModel implements ILinkModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.i(TAG, "onError: "+e.getMessage());
+                        e.printStackTrace();
+                        Log.i(TAG, "onError: "+e.getLocalizedMessage());
                         loadListener.loadFailure(e.getMessage());
                     }
 
@@ -125,6 +127,7 @@ public class LinkModel implements ILinkModel {
                 slb.time.set(time);
                 slb.isGone.set(true);
                 simpleLinkbeanList.add(slb);
+                Log.d(TAG, "Link_onNext: "+slb.title.get());
             }
         }
     }

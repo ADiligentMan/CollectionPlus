@@ -170,20 +170,19 @@ public class AnalyzeHtml {
         String res ="null";
         try {
             Document doc = Jsoup.connect(htmlUrl).get();
-            Elements pngs = doc.select("img[src$=.jpg]");
-            int num = pngs.size()/2;
+            Elements pngs1 = doc.select("img[src$=.jpg]");
+            Elements pngs2 = doc.select("img[src$=.png]");
+            if(pngs1.size()==0&&pngs2.size()==0)
+                return res;
+            int num = pngs1.size()!=0 ? pngs1.size():pngs2.size();
+            Elements pngs =  pngs1.size()!=0 ? pngs1:pngs2;
+            num = num/2;
             res = pngs.get(num).attr("src");
-            //for (Element element : pngs) {
-                //Bitmap bitmap = getHttpBitmap(element.attr("src"));//从网络获取图片
-                //res = saveBitmap(bitmap);//保存图片到图库
-                //res = getHtmlImages(element.attr("src"));
-//                if(!res.equals("null"))
-//                    break;
-//            }
-            //res = getHtmlImages(pngs.attr("src"));
+
         } catch (IOException e) {
-            //e.printStackTrace();
+
         }
         return res;
     }
+
 }

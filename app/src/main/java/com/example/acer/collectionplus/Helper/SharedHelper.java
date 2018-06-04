@@ -6,7 +6,6 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import static android.support.constraint.Constraints.TAG;
-
 public class SharedHelper {
 
     public static  final String TAG ="SharedHelper";

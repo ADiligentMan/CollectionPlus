@@ -4,6 +4,7 @@ package com.example.acer.collectionplus.View;
 import android.app.Fragment;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +52,7 @@ public class MainFragment extends Fragment implements IMainFragmentView {
         binding.xrvLink.setRefreshProgressStyle(ProgressStyle.BallClipRotate);
         binding.xrvLink.setLoadingMoreProgressStyle(ProgressStyle.BallClipRotate);
         binding.xrvLink.setArrowImageView(R.drawable.pull_down_arrow);
+        //binding.xrvLink.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         binding.xrvLink.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -100,7 +102,7 @@ public class MainFragment extends Fragment implements IMainFragmentView {
     @Override
     public void loadStart(int loadType) {
         if (loadType == MainConstant.LoadData.FIRST_LOAD) {
-            DialogHelper.getInstance().show(getActivity(), "加载中...");
+            DialogHelper.getInstance().show(getActivity(), "加载中...", DialogHelper.LOAD_DIALOG);
         }
     }
 
@@ -136,8 +138,12 @@ public class MainFragment extends Fragment implements IMainFragmentView {
      * @param position 收藏夹位置
      */
     @Override
-    public void changeDir(String dirname, int position) {
-
+    public void changeDir(View view,String dirname, int position) {
+        if(dirAdapter.getStatus()==DirAdapter.OPEN){
+            dirAdapter.colseItemMenu();
+            dirAdapter.setStatus(DirAdapter.CLOSE);
+            return;
+        }
         linkVM.onChangeDir(dirname, position);
     }
 }

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+  >
+
+
+    <data>
+        <variable
+            name="userbean"
+            type="com.example.acer.collectionplus.JavaBean.SimpleUserBean"/>
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        xmlns:leon="http://schemas.android.com/apk/res-auto"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="178dp"
+            android:layout_marginBottom="16dp"
+
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="600dp"
+
+                android:layout_height="50dp"
+                android:background="#454fb0"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="个人中心"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:id="@+id/user_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="301dp"
+                android:layout_marginTop="97dp"
+
+                />
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_alignTop="@+id/user_image"
+                android:layout_centerHorizontal="true"
+                android:text="用户名"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="40dp"
+
+                android:layout_height="20dp"
+                android:layout_alignTop="@+id/user_name"
+                android:layout_toEndOf="@+id/user_name"
+                android:text="关注数"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/user_likenumber"
+                android:layout_width="20dp"
+
+                android:layout_height="20dp"
+                android:layout_alignBaseline="@+id/textView3"
+                android:layout_alignBottom="@+id/textView3"
+                android:layout_toEndOf="@+id/textView3"
+                android:text="111"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="40dp"
+
+                android:layout_height="20dp"
+                android:layout_below="@+id/user_name"
+                android:layout_toEndOf="@+id/user_name"
+                android:text="粉丝数"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/user_funumber"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+
+                android:layout_above="@+id/user_introduce"
+                android:layout_toEndOf="@+id/textView5"
+                android:text="222"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/user_introduce"
+                android:layout_width="250dp"
+
+
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/user_name"
+                android:text="@{userbean.introduce}"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:id="@+id/set_Button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@+id/textView5"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/set_btn" />
+
+        </RelativeLayout>
+
+
+        <com.leon.lib.settingview.LSettingItem
+            android:id="@+id/item_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            leon:leftIcon="@drawable/change"
+            leon:leftText="      修改密码" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp">
+            <com.leon.lib.settingview.LSettingItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                leon:leftIcon="@drawable/like_1"
+                leon:leftText="      同步收藏夹"
+                leon:rightStyle="iconSwitch"
+                android:id="@+id/sycho">
+
+
+            </com.leon.lib.settingview.LSettingItem>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp">
+            <com.leon.lib.settingview.LSettingItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                leon:leftIcon="@drawable/fun"
+                leon:leftText="      公开收藏夹"
+                leon:rightStyle="iconSwitch"
+                android:id="@+id/Public"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp">
+            <com.leon.lib.settingview.LSettingItem
+                android:id="@+id/help"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                leon:leftIcon="@drawable/introduce"
+                leon:leftText="      帮助与客服"
+                >
+
+
+            </com.leon.lib.settingview.LSettingItem>
+
+        </RelativeLayout>
+        <com.leon.lib.settingview.LSettingItem
+            android:id="@+id/history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            leon:leftIcon="@drawable/history"
+
+            leon:leftText="       浏览历史" />
+
+
+
+
+    </LinearLayout>
+</layout>

@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 

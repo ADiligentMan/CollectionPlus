@@ -15,17 +15,29 @@
             name="position"
             type="int"/>
     </data>
-
-    <android.support.constraint.ConstraintLayout
+    <com.dd.ShadowLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        app:sl_shadowColor="#303F51B5"
+        app:sl_shadowRadius="6dp"
+        app:sl_dx="2dp"
+        app:sl_dy="1.5dp">
+    <android.support.constraint.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="17dp"
+        android:shadowDx="15"
+        android:shadowDy="20"
+        android:shadowColor="@color/colorPrimary"
+        android:background="@drawable/pressed_selector"
         android:padding="10dp">
 
         <LinearLayout
             android:id="@+id/linear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal"
             android:onClick="@{()->mAdapter.clickLink(mBean.value,position)}"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -35,7 +47,7 @@
                 android:id="@+id/tv_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="2.5dp"
+                android:layout_marginRight="30dp"
                 android:layout_weight="3"
                 android:text="@{mBean.title}"
                 android:textColor="@color/colorBlack"
@@ -130,4 +142,5 @@
                 android:text="定时" />
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>
+    </com.dd.ShadowLayout>
 </layout>

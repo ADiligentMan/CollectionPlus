@@ -10,15 +10,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.RadioGroup;
 
+import com.example.acer.collectionplus.Helper.DialogHelper;
 import com.example.acer.collectionplus.Helper.SharedHelper;
 import com.example.acer.collectionplus.R;
+import com.example.acer.collectionplus.ViewModel.MainVM;
 import com.example.acer.collectionplus.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
    public static final String TAG ="MainActivity";
     ActivityMainBinding binding;
     MainFragment mainFragment;
-
+    UserFragment userFragment;
+    MainVM mainVM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         //初始化SharedPreference ,其生命周期同应用进程，不会随activity的销毁而销毁。
         SharedHelper.getInstance().initShared(getApplicationContext());
         SharedHelper.getInstance().setValue("username","wangpeng");
+        mainVM = new MainVM(getApplicationContext());
         initFragment();
         initRadioGruop();
     }
@@ -39,6 +43,16 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(mainFragment);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //如果剪贴板改变 弹出对话框
+        if( mainVM.chipIsChanged()){
+            DialogHelper.getInstance().show(this,mainVM.getCurrClip(),DialogHelper.ADD_DIALOG);
+            mainVM.backToStartState();
+        }
+    }
+
     /**
      * 初始化RadioGruop
      */
@@ -47,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 Fragment fragment = null;
-                int layoutId=0;
                 switch (checkedId) {
                     case R.id.bottom_home:
                         mainFragment = mainFragment==null?new MainFragment():mainFragment;
@@ -58,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.bottom_link:
                         break;
                     case R.id.bottom_mime:
+                        userFragment  = userFragment == null?new UserFragment():userFragment;
+                        fragment = userFragment;
                         break;
                 }
                 replaceFragment(fragment);
@@ -78,5 +93,8 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    public static  void actionStart(){
+
+    }
 
 }
