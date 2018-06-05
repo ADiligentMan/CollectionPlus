@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     MainFragment mainFragment;
     UserFragment userFragment;
+    RecomFragment recomFragment;
     MainVM mainVM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
                        fragment = mainFragment;
                         break;
                     case R.id.bottom_find:
+                        recomFragment = recomFragment==null?new RecomFragment():recomFragment;
+                        fragment = recomFragment;
                         break;
                     case R.id.bottom_link:
                         break;

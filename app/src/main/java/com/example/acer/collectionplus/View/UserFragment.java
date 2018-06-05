@@ -1,6 +1,7 @@
 package com.example.acer.collectionplus.View;
 
 import android.app.Fragment;
+//import android.databinding.DataBindingUtil;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 
@@ -23,10 +24,9 @@ public class UserFragment extends Fragment implements IUserFragmentView
    // private UserAdapter userAdapter;
     private UserVM userVM;
 
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding=DataBindingUtil.inflate(inflater,R.layout.fragment_user,container,false);
+        binding= DataBindingUtil.inflate(inflater,R.layout.fragment_user,container,false);
        // initDirRecyclView();.
        // initLinkRecycleView();
         this.userVM = new UserVM(this);
