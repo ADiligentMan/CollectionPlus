@@ -2,6 +2,7 @@ package com.example.acer.collectionplus.View;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -96,6 +97,14 @@ public class MainActivity extends AppCompatActivity {
 
     public static  void actionStart(){
 
+    }
+
+    //宿主activity声明回调方法
+    protected  void onActivityResult(int requestCode, int resultCode, Intent data){
+        /*获取对应fragment*/
+        android.support.v4.app.Fragment fragment=getSupportFragmentManager().findFragmentByTag("UserFragment");
+        /*fragment调用自己重写的回调方法*/
+        fragment.onActivityResult(requestCode,resultCode,data);
     }
 
 }
