@@ -29,7 +29,8 @@ public class TimeHelper {
     }
 
     /**
-     * 把Date转化为 yyyy-MM-dd HH:mm:ss的格式
+     *
+     * Date -> MM-dd
      * @param date
      * @return
      */
@@ -37,6 +38,5 @@ public class TimeHelper {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return  sdf.format(date);
     }
-
 
 }

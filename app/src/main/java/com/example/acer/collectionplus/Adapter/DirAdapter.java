@@ -216,5 +216,11 @@ public class DirAdapter extends BaseAdapter<SimpleDirBean,BaseViewHolder> {
     }
 
 
+    public void addDir(SimpleDirBean sdb){
+         dataSet.add(sdb);
+         notifyDataSetChanged();
+    }
+
+
 }
 

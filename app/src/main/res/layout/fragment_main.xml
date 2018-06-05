@@ -6,7 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activity.MainActivity">
-
         <!--收藏列表-->
         <com.jcodecraeer.xrecyclerview.XRecyclerView
             android:id="@+id/xrv_link"
@@ -21,14 +20,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="#dbf7f5f5">
+            android:background="#dbf7f5f5"
+            android:orientation="vertical">
             <!--收藏夹列表-->
             <com.jcodecraeer.xrecyclerview.XRecyclerView
                 android:id="@+id/xrv_dir"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 tools:itemCount="3"/>
-        </LinearLayout>
 
+            <Button
+                android:id="@+id/btn_adddir_inmain"
+                android:layout_margin="10dp"
+                android:background="@drawable/shape_adddir_button"
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:text="创建"
+                android:textSize="15dp"
+                android:textColor="#ffffff"
+                android:layout_height="50dp" />
+        </LinearLayout>
     </android.support.v4.widget.DrawerLayout>
 </layout>

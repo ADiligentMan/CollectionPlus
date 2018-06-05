@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         binding.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                Log.d(TAG, "onCheckedChanged: "+"Success");
                 Fragment fragment = null;
                 switch (checkedId) {
                     case R.id.bottom_home:
