@@ -33,10 +33,12 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.android.support:design:27.+'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    implementation 'com.android.support:support-v4:27.1.0'
+    //noinspection GradleCompatible
+    //implementation 'com.android.support:support-v4:27.1.0'
     testImplementation 'junit:junit:4.12'
     compile 'com.leon:lsettingviewlibrary:1.0'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

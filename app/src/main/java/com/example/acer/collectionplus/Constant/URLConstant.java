@@ -9,4 +9,7 @@ public class URLConstant {
     public static final String URL_SENDEMAIL="user/sendemail.do";
     public static final String URL_USERINFO="user/getInfo.do";
     public static final String URL_MODIFYUSER="user/modifyInfo.do";
+    public static final String URL_MODIFYPASSWORD="user/modifyPassword.do";
+    public static final String URL_CHECKENSURECODE="user/checkEnsureCode.do";
+    //public static final String URL_SENDEMAILF="user/sendemailf.do";
 }
