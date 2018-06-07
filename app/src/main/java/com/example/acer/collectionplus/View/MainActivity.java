@@ -78,14 +78,14 @@ public class MainActivity extends AppCompatActivity {
                        fragment = mainFragment;
                         break;
                     case R.id.bottom_find:
+                        recomFragment = recomFragment==null?new RecomFragment():recomFragment;
+                        fragment = recomFragment;
                         break;
                     case R.id.bottom_link:
                         break;
                     case R.id.bottom_mime:
-                        Log.d("userfragment","跳转");
-                        userFragment = userFragment==null?new UserFragment():userFragment;
-                        Log.d("userfragment","跳转");
-                        fragment=userFragment;
+                        userFragment  = userFragment == null?new UserFragment():userFragment;
+                        fragment = userFragment;
                         break;
                 }
                 replaceFragment(fragment);
