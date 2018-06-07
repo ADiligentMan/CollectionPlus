@@ -6,7 +6,9 @@
         <variable
             name="recomUserBean"
             type="com.example.acer.collectionplus.JavaBean.SimpleRecomUserBean" />
-
+        <variable
+            name="recomUserAdapter"
+            type="com.example.acer.collectionplus.Adapter.RecomUserAdapter"/>
     </data>
     <android.support.constraint.ConstraintLayout
         android:layout_width="80dp"
@@ -26,6 +28,7 @@
             android:src="@mipmap/ic_launcher"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            android:onClick="@{()->recomUserAdapter.clickUser(recomUserBean.name)}"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
