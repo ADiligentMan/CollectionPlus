@@ -2,6 +2,7 @@ package com.example.acer.collectionplus.ViewModel;
 
 import com.example.acer.collectionplus.Adapter.DirAdapter;
 import com.example.acer.collectionplus.Adapter.UserAdapter;
+import com.example.acer.collectionplus.Base.BaseBean;
 import com.example.acer.collectionplus.Base.BaseLoadListener;
 import com.example.acer.collectionplus.JavaBean.SimpleDirBean;
 import com.example.acer.collectionplus.JavaBean.SimpleUserBean;
@@ -14,6 +15,7 @@ import com.example.acer.collectionplus.View.IUserFragmentView;
 import com.example.acer.collectionplus.databinding.FragmentUserBinding;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by asus on 2018/5/19.
@@ -25,12 +27,12 @@ public class UserVM implements BaseLoadListener<SimpleUserBean> {
     IUserModel userModel;
     UserAdapter mAdapter;
     FragmentUserBinding VM_binding;
-    public UserVM(IUserFragmentView view,UserAdapter mAdapter){
+    public UserVM(IUserFragmentView view){
         this.view =view;
         userModel= new UserModel();
         //设置数据
-      //  this.mAdapter = mAdapter;
-        initData();
+
+       // initData();
     }
     //初始化数据
     private void initData(){

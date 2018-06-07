@@ -2,25 +2,30 @@ package com.example.acer.collectionplus.View;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.RadioGroup;
 
 import com.example.acer.collectionplus.Helper.SharedHelper;
 import com.example.acer.collectionplus.R;
 import com.example.acer.collectionplus.databinding.ActivityMainBinding;
+import com.example.acer.collectionplus.databinding.FragmentUserBinding;
 
 public class MainActivity extends AppCompatActivity {
    public static final String TAG ="MainActivity";
     ActivityMainBinding binding;
     MainFragment mainFragment;
     UserFragment userFragment;
+    ChangeFragment changeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +44,11 @@ public class MainActivity extends AppCompatActivity {
      * 刚开始进来加载第一个fragment
      */
     private void initFragment(){
-        mainFragment = mainFragment==null?new MainFragment():mainFragment;
-        replaceFragment(mainFragment);
+        //mainFragment = mainFragment==null?new MainFragment():mainFragment;
+
+        userFragment = userFragment==null?new UserFragment():userFragment;
+        replaceFragment(userFragment);
+
     }
 
     /**
@@ -50,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         binding.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                Log.d("click","success");
                 Fragment fragment = null;
                 int layoutId=0;
                 switch (checkedId) {
@@ -58,12 +67,15 @@ public class MainActivity extends AppCompatActivity {
                        fragment=mainFragment;
                         break;
                     case R.id.bottom_find:
-                        userFragment=userFragment==null?new UserFragment():userFragment;
-                        fragment=userFragment;
+
                         break;
                     case R.id.bottom_link:
                         break;
                     case R.id.bottom_mime:
+                        Log.d("userfragment","跳转");
+                        userFragment = userFragment==null?new UserFragment():userFragment;
+                        Log.d("userfragment","跳转");
+                        fragment=userFragment;
                         break;
                 }
                 replaceFragment(fragment);
@@ -83,6 +95,18 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.container_fragment,fragment);
         transaction.commit();
     }
-
+//宿主activity声明回调方法
+    protected  void onActivityResult(int requestCode, int resultCode, Intent data){
+        /*获取对应fragment*/
+        android.support.v4.app.Fragment fragment=getSupportFragmentManager().findFragmentByTag("UserFragment");
+        /*fragment调用自己重写的回调方法*/
+        fragment.onActivityResult(requestCode,resultCode,data);
+    }
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions, @NonNull int[] grantResults){
+        android.support.v4.app.Fragment fragment=getSupportFragmentManager().findFragmentByTag("UserFragment");
+        /*fragment调用自己重写的回调方法*/
+        fragment.onRequestPermissionsResult(requestCode,permissions,grantResults);
+    }
 
 }
