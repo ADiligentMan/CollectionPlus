@@ -40,7 +40,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
-import com.example.acer.collectionplus.Adapter.UserAdapter;
+//import com.example.acer.collectionplus.Adapter.UserAdapter;
 
 import com.example.acer.collectionplus.Helper.SharedHelper;
 import com.example.acer.collectionplus.R;
@@ -48,7 +48,7 @@ import com.example.acer.collectionplus.R;
 import com.example.acer.collectionplus.UIUtils.ImageUtils;
 import com.example.acer.collectionplus.ViewModel.UserVM;
 import com.example.acer.collectionplus.databinding.FragmentUserBinding;
-import com.leon.lib.settingview.LSettingItem;
+//import com.leon.lib.settingview.LSettingItem;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

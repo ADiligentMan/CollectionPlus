@@ -1,7 +1,7 @@
 package com.example.acer.collectionplus.ViewModel;
 
 import com.example.acer.collectionplus.Adapter.DirAdapter;
-import com.example.acer.collectionplus.Adapter.UserAdapter;
+//import com.example.acer.collectionplus.Adapter.UserAdapter;
 import com.example.acer.collectionplus.Base.BaseBean;
 import com.example.acer.collectionplus.Base.BaseLoadListener;
 import com.example.acer.collectionplus.JavaBean.SimpleUserBean;

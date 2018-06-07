@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     MainFragment mainFragment;
     UserFragment userFragment;
-    ChangeFragment changeFragment;
+    MainVM mainVM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
