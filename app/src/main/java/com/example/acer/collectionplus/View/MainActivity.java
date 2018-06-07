@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.RadioGroup;
@@ -106,5 +107,6 @@ public class MainActivity extends AppCompatActivity {
         /*fragment调用自己重写的回调方法*/
         fragment.onActivityResult(requestCode,resultCode,data);
     }
+
 
 }

@@ -3,6 +3,7 @@ package com.example.acer.collectionplus.ViewModel;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.databinding.ViewDataBinding;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,27 +17,35 @@ import com.example.acer.collectionplus.Model.DirModel;
 import com.example.acer.collectionplus.Model.IDirModel;
 import com.example.acer.collectionplus.Model.ILinkModel;
 import com.example.acer.collectionplus.R;
+import com.example.acer.collectionplus.BR;
 import com.example.acer.collectionplus.View.IMainFragmentView;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class DirVM implements BaseLoadListener<SimpleDirBean>{
+    public static final String  TAG ="DirVM";
     IMainFragmentView view;
-    IDirModel dirModel;
+    DirModel dirModel;
     DirAdapter mAdapter;
     Context mContext;
-    public DirVM(Context mContext,IMainFragmentView view, DirAdapter mAdapter){
+    ViewDataBinding binding;
+    public DirVM(Context mContext, IMainFragmentView view, DirAdapter mAdapter,ViewDataBinding binding){
+        this.binding = binding;
         this.mContext = mContext;
         this.view =view;
         dirModel  = new DirModel();
         this.mAdapter = mAdapter;
+        this.mAdapter.setModel(dirModel);
+        binding.setVariable(BR.mDirVM,this);
         initData();
     }
 
     private void initData(){
         dirModel.loadData(this,null);
     }
+
     public  void onRefreshData(){
         //刷新数据
         dirModel.loadData(this,null);
@@ -81,10 +90,10 @@ public class DirVM implements BaseLoadListener<SimpleDirBean>{
     }
 
     /**
-     * 点击创建收藏夹按钮
+     * 点击创建文件夹按钮
      */
-    public void onClickAddDir(){
-
+    public void onClickAddDir() {
+        Log.d(TAG, "onClickAddDir: ");
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setIcon(R.mipmap.ic_launcher_round);
         builder.setTitle("请输入新名称");
@@ -100,13 +109,20 @@ public class DirVM implements BaseLoadListener<SimpleDirBean>{
              */
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //创建一个收藏夹。
+                //获取新建收藏夹的信息
                 EditText et_name = view.findViewById(R.id.et_dirname);
+                String dirname = et_name.getText().toString();
                 String time = TimeHelper.getFormatedTime(new Date());
-                SimpleDirBean sdb = new SimpleDirBean();
-                sdb.dirname.set(et_name.getText().toString());
-                sdb.time.set(time);
-                mAdapter.addDir(sdb);
+                //跟新前端显示
+                SimpleDirBean bean = new SimpleDirBean();
+                bean.dirname.set(et_name.getText().toString());
+                bean.time.set(TimeHelper.getFormatedTime(new Date()));
+                bean.isClicked.set(false);
+                List<SimpleDirBean> beans = new ArrayList<>();
+                beans.add(bean);
+                mAdapter.loadMoreData(beans);
+                //跟新后台
+                dirModel.createDir(dirname);
             }
         });
         builder.setNegativeButton("取消",null);

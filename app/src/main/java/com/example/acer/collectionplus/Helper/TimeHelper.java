@@ -35,7 +35,7 @@ public class TimeHelper {
      * @return
      */
     public static String getFormatedTime(Date date){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
         return  sdf.format(date);
     }
 

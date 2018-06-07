@@ -18,15 +18,21 @@ import android.widget.EditText;
 import com.example.acer.collectionplus.BR;
 import com.example.acer.collectionplus.Base.BaseAdapter;
 import com.example.acer.collectionplus.Base.BaseViewHolder;
+import com.example.acer.collectionplus.Helper.TimeHelper;
+import com.example.acer.collectionplus.Helper.ToastUtils;
 import com.example.acer.collectionplus.JavaBean.SimpleDirBean;
 import com.example.acer.collectionplus.JavaBean.SimpleLinkBean;
+import com.example.acer.collectionplus.Model.DirModel;
 import com.example.acer.collectionplus.R;
 import com.example.acer.collectionplus.View.IMainFragmentView;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DirAdapter extends BaseAdapter<SimpleDirBean,BaseViewHolder> {
     public static  final String TAG = "DirAdapter";
+    private DirModel model;
     //项菜单打开和关闭
     public static final  int OPEN = 1;
     public static final int CLOSE = 2;
@@ -38,6 +44,11 @@ public class DirAdapter extends BaseAdapter<SimpleDirBean,BaseViewHolder> {
         super(context);
         this.view = view;
     }
+
+    public void setModel(DirModel model){
+        this.model = model;
+    }
+
     /**
      * 创建ViewHoler
      *
@@ -78,9 +89,17 @@ public class DirAdapter extends BaseAdapter<SimpleDirBean,BaseViewHolder> {
         dataSet.clear();
         SimpleDirBean simpleDirBean = new SimpleDirBean();
         simpleDirBean.dirname.set("all");
-        simpleDirBean.time.set("");
+        simpleDirBean.time.set("04-09");
+        simpleDirBean.isClicked.set(false);
+
         dataSet.add(simpleDirBean);
-        dataSet.addAll(data);
+        for(SimpleDirBean origin : data) {
+            SimpleDirBean bean = new SimpleDirBean();
+            bean.dirname.set(origin.dirname.get());
+            bean.time.set(origin.time.get());
+            bean.isClicked.set(origin.isClicked.get());
+            dataSet.add(bean);
+        }
         notifyDataSetChanged();
     }
 
@@ -116,7 +135,11 @@ public class DirAdapter extends BaseAdapter<SimpleDirBean,BaseViewHolder> {
              */
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                //更新前端
                 removeItem(position);
+                //更新后台
+                String dirname = dataSet.get(position).dirname.get();
+                model.deleteDir(dirname);
             }
         });
         builder.setNegativeButton("取消",null);
@@ -147,8 +170,19 @@ public class DirAdapter extends BaseAdapter<SimpleDirBean,BaseViewHolder> {
              */
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                //得到收藏夹的旧名称和新名称
                 EditText et_name = view.findViewById(R.id.et_dirname);
+                String olddirname = dataSet.get(position).dirname.get();
+                String newdirname = et_name.getText().toString();
+                //容错处理，如果新收藏夹名称为空则退出
+                if(newdirname==null){
+                    ToastUtils.show(mContext,"收藏夹名称不能为空");
+                    return;
+                }
+                //修改前端显示
                dataSet.get(position).dirname.set(et_name.getText().toString());
+                //修改后端数据库
+               model.renameDir(olddirname,newdirname);
             }
         });
         builder.setNegativeButton("取消",null);
@@ -216,10 +250,6 @@ public class DirAdapter extends BaseAdapter<SimpleDirBean,BaseViewHolder> {
     }
 
 
-    public void addDir(SimpleDirBean sdb){
-         dataSet.add(sdb);
-         notifyDataSetChanged();
-    }
 
 
 }

@@ -4,16 +4,10 @@ import android.util.Log;
 
 import com.example.acer.collectionplus.Base.BaseLoadListener;
 import com.example.acer.collectionplus.Helper.SharedHelper;
-import com.example.acer.collectionplus.Helper.TimeHelper;
 import com.example.acer.collectionplus.Http.HttpUtils;
-import com.example.acer.collectionplus.JavaBean.DirBean;
-import com.example.acer.collectionplus.JavaBean.SimpleDirBean;
 import com.example.acer.collectionplus.JavaBean.SimpleUserBean;
 import com.example.acer.collectionplus.JavaBean.UserBean;
-import com.example.acer.collectionplus.RetrofitInterface.MainFragment;
 import com.example.acer.collectionplus.RetrofitInterface.UserFragmentImpl;
-import com.example.acer.collectionplus.View.UserFragment;
-import com.example.acer.collectionplus.databinding.FragmentUserBinding;
 
 import java.util.ArrayList;
 import java.util.List;
