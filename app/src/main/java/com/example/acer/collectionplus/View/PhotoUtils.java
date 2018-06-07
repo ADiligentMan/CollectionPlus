@@ -1,6 +1,7 @@
 package com.example.acer.collectionplus.View;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ContentUris;
@@ -90,8 +91,6 @@ public class PhotoUtils {
     public static void openPic(Fragment fragment, int requestCode) {
         Log.d("openpic","success");
         Intent photoPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        photoPickerIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        photoPickerIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         photoPickerIntent.setType("image/*");
         fragment.startActivityForResult(photoPickerIntent, requestCode);
     }
@@ -118,8 +117,6 @@ public class PhotoUtils {
                                     Uri desUri, int aspectX, int aspectY,
                                     int width, int height, int requestCode) {
         Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         }
@@ -368,9 +365,7 @@ public class PhotoUtils {
 
         }
 
-
-
-
-
     }
+
+
 }

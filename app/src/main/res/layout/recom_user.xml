@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="recomUserBean"
+            type="com.example.acer.collectionplus.JavaBean.SimpleRecomUserBean" />
+        <variable
+            name="recomUserAdapter"
+            type="com.example.acer.collectionplus.Adapter.RecomUserAdapter"/>
+    </data>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="80dp"
+        android:layout_height="120dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:background="@drawable/recom_user_border"
+        android:padding="3dp">
+
+        <ImageView
+            android:id="@+id/recom_user_image"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:onClick="@{()->recomUserAdapter.clickUser(recomUserBean.name)}"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/recom_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{recomUserBean.name}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recom_user_image" />
+
+        <TextView
+            android:id="@+id/recom_user_intro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="test"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recom_user_name" />
+
+        <TextView
+            android:id="@+id/recom_user_simi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recom_user_intro" />
+
+        <TextView
+            android:id="@+id/recom_user_follow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+关注"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

@@ -40,17 +40,15 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
-
-
+//import com.example.acer.collectionplus.Adapter.UserAdapter;
 
 import com.example.acer.collectionplus.Helper.SharedHelper;
 import com.example.acer.collectionplus.R;
 
 import com.example.acer.collectionplus.UIUtils.ImageUtils;
 import com.example.acer.collectionplus.ViewModel.UserVM;
-import com.example.acer.collectionplus.databinding.FragmentMainBinding;
 import com.example.acer.collectionplus.databinding.FragmentUserBinding;
-import com.leon.lib.settingview.LSettingItem;
+//import com.leon.lib.settingview.LSettingItem;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -70,21 +68,9 @@ import static com.example.acer.collectionplus.View.PhotoUtils.isMediaDocument;
 
 public class UserFragment extends Fragment implements IUserFragmentView
 {
-    //新加的
-    private static final int PERMISSIONS_FOR_TAKE_PHOTO = 10;
-    //图片文件路径
-    private String picPath;
-    //图片对应Uri
-    private Uri photoUri;
-    //拍照对应RequestCode
-    public static final int SELECT_PIC_BY_TACK_PHOTO = 1;
-    //裁剪图片
-    private static final int CROP_PICTURE = 3;
-    //end
 
     public static final String TAG = "UserFragment";
     private  FragmentUserBinding binding;
-
     private UserVM userVM;
     //定义
     protected static final int CHOOSE_PICTURE = 0;
@@ -125,16 +111,17 @@ public class UserFragment extends Fragment implements IUserFragmentView
             }
         });
         //点击跳转修改信息界面
+        //设置点击事件
         change_image=binding.setButton;
-        change_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //在activity里回调
-                if(onButtonClick!=null){
-                    onButtonClick.onClick(change_image);
-                }
-            }
-        });
+       change_image.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent intent = new Intent(getActivity(), ChangeActivity.class);
+               startActivity(intent);
+
+           }
+       });
+
         //为fragment绑定用户界面
         return binding.getRoot();
     }
@@ -265,8 +252,6 @@ public class UserFragment extends Fragment implements IUserFragmentView
     public interface OnButtonClick{
         public void onClick(View view);
     }
-
-
     //-------------------------------------------------------------------
     @Override
     public void loadStart(int loadType) {
