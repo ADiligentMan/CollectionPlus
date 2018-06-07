@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     MainFragment mainFragment;
     UserFragment userFragment;
+    RecomFragment recomFragment;
     MainVM mainVM;
 
     @Override
