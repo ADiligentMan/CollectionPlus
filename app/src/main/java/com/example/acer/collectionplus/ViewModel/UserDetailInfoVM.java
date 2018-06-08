@@ -7,6 +7,7 @@ import com.example.acer.collectionplus.JavaBean.SimpleUserDetailCollectBean;
 import com.example.acer.collectionplus.JavaBean.SimpleUserDetailInfoBean;
 import com.example.acer.collectionplus.Model.UserDetailCollectModel;
 import com.example.acer.collectionplus.Model.UserDetailInfoModel;
+import com.example.acer.collectionplus.databinding.FragmentUserBinding;
 import com.example.acer.collectionplus.databinding.FragmentUserDetailBinding;
 
 import java.util.List;
@@ -42,6 +43,11 @@ public class UserDetailInfoVM implements BaseLoadListener<SimpleUserDetailInfoBe
 
     @Override
     public void loadComplete() {
+
+    }
+
+    public void getbinding(FragmentUserDetailBinding binding) {
+        this.fragmentUserDetailBinding = binding;
 
     }
 }

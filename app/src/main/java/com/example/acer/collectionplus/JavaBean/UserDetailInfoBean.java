@@ -7,13 +7,13 @@ public class UserDetailInfoBean extends BaseBean<UserDetailInfoBean.Entity> {
     public static class Entity {
 
         private String collectNum;
-        private String folderNUm;
+        private String folderNum;
         private String fansNum;
         private String followNum;
 
-        public Entity(String collectNum, String folderNUm, String fansNum, String followNum) {
+        public Entity(String collectNum, String folderNum, String fansNum, String followNum) {
             this.collectNum = collectNum;
-            this.folderNUm = folderNUm;
+            this.folderNum = folderNum;
             this.fansNum = fansNum;
             this.followNum = followNum;
         }
@@ -26,12 +26,12 @@ public class UserDetailInfoBean extends BaseBean<UserDetailInfoBean.Entity> {
             this.collectNum = collectNum;
         }
 
-        public String getFolderNUm() {
-            return folderNUm;
+        public String getFolderNum() {
+            return folderNum;
         }
 
-        public void setFolderNUm(String folderNUm) {
-            this.folderNUm = folderNUm;
+        public void setFolderNum(String folderNum) {
+            this.folderNum = folderNum;
         }
 
         public String getFansNum() {

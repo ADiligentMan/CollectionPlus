@@ -34,6 +34,7 @@ public class UserDetailFragment extends Fragment {
         initUserInfo();
         this.userDetailVM = new UserDetailVM(userDetailAdapter);
         this.userDetailInfoVM = new UserDetailInfoVM();
+        userDetailInfoVM.getbinding(binding);
         return binding.getRoot();
     }
 

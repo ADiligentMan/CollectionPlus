@@ -73,13 +73,13 @@ public class UserDetailInfoModel implements IUserDetailInfoModel {
         if (entities != null && entities.size() > 0) {
             for (UserDetailInfoBean.Entity entity : entities) {
                 String collectNum = entity.getCollectNum();
-                String folderNUm = entity.getFolderNUm();
+                String folderNum = entity.getFolderNum();
                 String fansNum = entity.getFansNum();
                 String followNum = entity.getFollowNum();
 
                 SimpleUserDetailInfoBean sucb = new SimpleUserDetailInfoBean();
                 sucb.collectNum.set(collectNum);
-                sucb.folderNUm.set(folderNUm);
+                sucb.folderNum.set(folderNum);
                 sucb.fansNum.set(fansNum);
                 sucb.followNum.set(followNum);
                 simpleUserDetailInfoBeans.add(sucb);

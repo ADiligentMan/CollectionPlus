@@ -8,6 +8,6 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 
 public interface UserDetailInfoHttp {
-    @GET(URLConstant.URL_GET_USER_PUBLIC_COLLECT)
+    @GET(URLConstant.URL_GET_USER_DETAIL_INFO)
     Observable<UserDetailInfoBean> getUserDetailInfo();
 }
