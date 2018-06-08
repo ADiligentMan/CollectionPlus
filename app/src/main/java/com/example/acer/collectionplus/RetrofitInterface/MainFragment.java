@@ -37,6 +37,7 @@ public interface MainFragment {
     Observable<BaseBean> getResultEnsureCode(@Query("email") String email,@Query("type") String type);
 
     //注册
+
     @GET(URLConstant.URL_REGISTER)
     Observable<BaseBean> getResultSign(@Query("username") String username, @Query("password") String password,@Query("email") String email, @Query("activeCode") String activeCode);
 
@@ -48,6 +49,17 @@ public interface MainFragment {
     @GET(URLConstant.URL_MODIFYPASSWORD)
     Observable<BaseBean> getResultPassword(@Query("email") String email, @Query("password") String password);
 
+    //重命名收藏夹
+    @GET("user/renamedir.do")
+    Observable<BaseBean> renameDir(@Query("username")String username,@Query("olddirname") String olddirname,@Query("newdirname") String newdirname);
+
+    //新建收藏夹
+    @GET("user/createdir.do")
+    Observable<BaseBean> createDir(@Query("username")String username,@Query("dirname") String dirname,@Query("type") String type);
+
+    //删除收藏夹
+    @GET("user/deletedir.do")
+    Observable<BaseBean> deleteDir(@Query("username")String username,@Query("dirname") String dirname);
 }
 
 

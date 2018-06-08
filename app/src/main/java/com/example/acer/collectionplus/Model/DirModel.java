@@ -3,6 +3,7 @@ package com.example.acer.collectionplus.Model;
 import android.util.Log;
 
 import com.example.acer.collectionplus.Adapter.DirAdapter;
+import com.example.acer.collectionplus.Base.BaseBean;
 import com.example.acer.collectionplus.Base.BaseLoadListener;
 import com.example.acer.collectionplus.Helper.SharedHelper;
 import com.example.acer.collectionplus.Helper.TimeHelper;
@@ -25,6 +26,15 @@ import io.reactivex.schedulers.Schedulers;
 public class DirModel implements IDirModel{
     public static final  String  TAG = "DirModel" ;
     private List<SimpleDirBean> simpleDirBeanList = new ArrayList<SimpleDirBean>();
+    private MainFragment proxy ;
+    private BaseLoadListener loadListener;
+
+    public DirModel(){
+        if(proxy==null){
+            proxy = HttpUtils.getRetrofit().create(MainFragment.class);
+        }
+
+    }
     /**
      * 刷新后加载所有收藏夹
      *
@@ -34,9 +44,10 @@ public class DirModel implements IDirModel{
      */
     @Override
     public void loadData(final BaseLoadListener<SimpleDirBean> loadListener, Map<String, String> params) {
+        this.loadListener = loadListener;
         String username = SharedHelper.getInstance().getValue("username");
 
-        Observable<DirBean> observable = HttpUtils.getRetrofit().create(MainFragment.class).getDirList(username);
+        Observable<DirBean> observable = proxy.getDirList(username);
 
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -60,6 +71,101 @@ public class DirModel implements IDirModel{
                         loadListener.loadComplete();
                     }
                 });
+    }
+
+    /**
+     * 重名名收藏夹
+     * @param oldname  旧名称
+     * @param newname   新名称
+     */
+    public void renameDir(String oldname,String newname){
+        String username = SharedHelper.getInstance().getValue("username");
+        proxy.renameDir(username,oldname,newname)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<BaseBean>() {
+                    @Override
+                    public void onNext(BaseBean baseBean) {
+                        isSuccess(baseBean);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        loadListener.loadFailure(e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    /**
+     * 删除收藏夹
+     * @param dirname 收藏夹名称
+     */
+    public void deleteDir(String dirname){
+        String username = SharedHelper.getInstance().getValue("username");
+        proxy.deleteDir(username,dirname)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<BaseBean>() {
+                    @Override
+                    public void onNext(BaseBean baseBean) {
+                        isSuccess(baseBean);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        loadListener.loadFailure(e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    /**
+     * 创建收藏夹
+     * @param dirname
+     */
+    public void createDir(String dirname){
+        String username = SharedHelper.getInstance().getValue("username");
+        proxy.createDir(username,dirname,"非清单")
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<BaseBean>() {
+                    @Override
+                    public void onNext(BaseBean baseBean) {
+                        isSuccess(baseBean);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        loadListener.loadFailure(e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    /**
+     * 判断后台处理是否成功
+     * @param baseBean
+     */
+    private void isSuccess(BaseBean baseBean){
+        boolean isSuccess = baseBean.isSuccess();
+        String Info = baseBean.getInfo();
+        Log.d(TAG, "isSuccess: "+isSuccess+":"+Info+":"+baseBean.getData());
+        if((!isSuccess)&&(loadListener!=null)){
+            loadListener.loadFailure("Back end fails-"+Info);
+        }
     }
 
     /**

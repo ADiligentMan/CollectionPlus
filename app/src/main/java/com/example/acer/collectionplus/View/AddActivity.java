@@ -44,6 +44,7 @@ public class AddActivity extends AppCompatActivity  implements IAddView{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         binding = DataBindingUtil.setContentView(this,R.layout.activity_add);
         binding.titlebar.title.set("编辑链接");
         binding.setVariable(BR.mView,this);

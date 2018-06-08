@@ -18,17 +18,12 @@
     <com.dd.ShadowLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:sl_shadowColor="#303F51B5"
-        app:sl_shadowRadius="6dp"
-        app:sl_dx="2dp"
-        app:sl_dy="1.5dp">
+        app:sl_shadowColor="#203F51B5"
+        app:sl_shadowRadius="10dp"
+        app:sl_cornerRadius="1dp">
     <android.support.constraint.ConstraintLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="17dp"
-        android:shadowDx="15"
-        android:shadowDy="20"
         android:shadowColor="@color/colorPrimary"
         android:background="@drawable/pressed_selector"
         android:padding="10dp">
@@ -109,7 +104,6 @@
             android:visibility="@{mBean.isGone ?View.GONE:View.VISIBLE}"
             app:layout_constraintTop_toBottomOf="@id/tv_dir">
 
-
             <CheckBox
                 android:id="@+id/cb_isread"
                 style="@style/BtnsOfLink"
@@ -122,19 +116,16 @@
                 style="@style/BtnsOfLink"
                 android:drawableTop="@drawable/btn_note"
                 android:text="笔记" />
-
             <Button
                 android:id="@+id/btn_delete"
                 style="@style/BtnsOfLink"
                 android:drawableTop="@drawable/btn_delete"
                 android:text="删除" />
-
             <Button
                 android:id="@+id/btn_share"
                 style="@style/BtnsOfLink"
                 android:drawableTop="@drawable/btn_share"
                 android:text="分享" />
-
             <Button
                 android:id="@+id/btn_clock"
                 style="@style/BtnsOfLink"
