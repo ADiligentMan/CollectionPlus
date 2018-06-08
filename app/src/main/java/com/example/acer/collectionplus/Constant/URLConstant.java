@@ -11,5 +11,9 @@ public class URLConstant {
     public static final String URL_MODIFYUSER="user/modifyInfo.do";
     public static final String URL_MODIFYPASSWORD="user/modifyPassword.do";
     public static final String URL_CHECKENSURECODE="user/checkEnsureCode.do";
-    //public static final String URL_SENDEMAILF="user/sendemailf.do";
+    public static final String URL_GET_RECOM_USER="user/recom_user.do";
+    public static final String URL_GET_RECOM_LINK = "user/recom_link.do";
+    public static final String URL_GET_USER_PUBLIC_COLLECT = "user/public_collect.do";
+    public static final String URL_GET_USER_DETAIL_INFO = "user/detail_info.do";
 }
+
