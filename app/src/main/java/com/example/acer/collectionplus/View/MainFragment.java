@@ -42,7 +42,7 @@ public class MainFragment extends Fragment implements IMainFragmentView {
         initDirRecyclView();
         initLinkRecycleView();
         this.linkVM = new LinkVM(this, linkAdapter);
-        this.dirVM = new DirVM(this, dirAdapter);
+        this.dirVM = new DirVM(getActivity(),this, dirAdapter,binding);
 
         return binding.getRoot();
     }
@@ -146,4 +146,6 @@ public class MainFragment extends Fragment implements IMainFragmentView {
         }
         linkVM.onChangeDir(dirname, position);
     }
+
+
 }

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="forgetView"
+            type="com.example.acer.collectionplus.View.ForgetActivity"/>
+    </data>
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar1"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            app:navigationIcon="@mipmap/back"
+            android:onClick="@{()->forgetView.backOnClick()}">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:text="找回密码"
+                android:textColor="@color/white"/>
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="135dp"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="82dp">
+
+            <EditText
+                android:id="@+id/editTextemailF"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/login_et_bg"
+                android:drawableLeft="@drawable/mail23"
+                android:drawablePadding="10dp"
+                android:hint="请输入邮箱地址"
+                android:inputType="textEmailAddress"
+                android:padding="5dp" />
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editTextEnsureWordF"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="2dp"
+                    android:layout_weight="4"
+                    android:background="@drawable/login_et_bg"
+                    android:hint="验证码"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:padding="5dp" />
+
+                <Button
+                    android:id="@+id/buttonEnsureWordF"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="2"
+                    android:background="@color/Indigo_nav_color"
+                    android:text="获取邮箱验证码"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:onClick="@{()->forgetView.getCodeOnClick()}"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonNext4"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_weight="4"
+            android:background="@drawable/login_btn"
+            android:text="下一步"
+            android:textColor="@android:color/white"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="237dp"
+            android:onClick="@{()->forgetView.nextOnClick()}">
+        </Button>
+
+    </LinearLayout>
+</layout>

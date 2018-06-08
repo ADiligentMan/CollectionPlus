@@ -29,14 +29,14 @@ public class TimeHelper {
     }
 
     /**
-     * 把Date转化为 yyyy-MM-dd HH:mm:ss的格式
+     *
+     * Date -> MM-dd
      * @param date
      * @return
      */
     public static String getFormatedTime(Date date){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
         return  sdf.format(date);
     }
-
 
 }

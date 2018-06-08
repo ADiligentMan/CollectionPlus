@@ -13,4 +13,5 @@ public interface IMainFragmentView extends IBaseView{
      * @param position 收藏夹位置
      */
      void changeDir(View view,String dirname, int position);
+
 }

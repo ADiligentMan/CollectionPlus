@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="mDirVM"
+            type="com.example.acer.collectionplus.ViewModel.DirVM"/>
+
+    </data>
 
     <android.support.v4.widget.DrawerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activity.MainActivity">
-
         <!--收藏列表-->
         <com.jcodecraeer.xrecyclerview.XRecyclerView
             android:id="@+id/xrv_link"
@@ -15,20 +21,59 @@
             tools:itemCount="3"
             tools:listitem="@layout/item_link"/>
 
-        <!--侧滑菜单-->
+
         <LinearLayout
             android:id="@+id/left_menu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="#dbf7f5f5">
-            <!--收藏夹列表-->
+            android:background="#dbf7f5f5"
+            android:orientation="vertical">
             <com.jcodecraeer.xrecyclerview.XRecyclerView
+
                 android:id="@+id/xrv_dir"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 tools:itemCount="3"/>
+
+            <Button
+                android:id="@+id/btn_adddir_inmain"
+                android:layout_margin="10dp"
+                android:onClick="@{()->mDirVM.onClickAddDir()}"
+                android:background="@drawable/shape_adddir_button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="创建"/>
+
         </LinearLayout>
+        <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:id="@+id/left_menu"-->
+            <!--android:layout_gravity="start"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="#dbf7f5f5">-->
+            <!--&lt;!&ndash;收藏列表&ndash;&gt;-->
+            <!--<com.jcodecraeer.xrecyclerview.XRecyclerView-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent"-->
+                <!--android:id="@+id/xrv_dir"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--tools:itemCount="3"/>-->
+
+            <!--<Button-->
+                <!--android:id="@+id/btn_adddir_inmain"-->
+                <!--android:layout_margin="10dp"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--android:background="@drawable/shape_adddir_button"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="60dp" />-->
+
+        <!--</android.support.constraint.ConstraintLayout>-->
+
 
     </android.support.v4.widget.DrawerLayout>
 </layout>
