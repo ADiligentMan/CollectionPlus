@@ -1,31 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--侧滑菜单-->
-<android.support.constraint.ConstraintLayout android:layout_width="match_parent"
-    android:padding="10dp"
-    android:layout_height="match_parent"
+<android.support.constraint.ConstraintLayout
+
+    android:layout_width="match_parent"
+    android:padding="5dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#dbf7f5f5"
-    android:gravity="bottom"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-    <!--收藏夹列表-->
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorWhite"
+    android:layout_margin="2dp">
+    <!--笔记日期-->
+    <TextView
+        android:id="@+id/tv_note_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="8dp"
+        android:textColor="#f7e7e4e4"
+        android:text="2018-10-24"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/xrv_dir"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+    <!--笔记标题,也可以没有-->
+    <TextView
+        android:layout_marginTop="5dp"
+        android:id="@+id/tv_note_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_note_time"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        tools:text="Java继承"/>
+    <!--content of note-->
+    <TextView
+        android:id="@+id/tv_note_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:itemCount="3"/>
-
-    <Button
-        android:id="@+id/btn_adddir_inmain"
-        android:layout_margin="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_note_title"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_gravity="bottom"
-        android:background="@drawable/shape_adddir_button"
-        android:layout_width="0dp"
-        android:layout_height="60dp" />
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="5dp"
+        android:textSize="12dp"
+       tools:text="这是正文"
+        />
+
+    <TextView
+        android:id="@+id/note_open_or_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_note_content"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="#ef003cff"
+        android:textSize="12dp"
+        tools:text="展开"
+        />
 </android.support.constraint.ConstraintLayout>

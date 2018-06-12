@@ -118,6 +118,7 @@ public class LinkModel implements ILinkModel {
                 boolean read = entity.isRead();
                 String title = entity.getTitle();
                 String time = TimeHelper.getFormatedTime(entity.getTime());
+                String ID  = entity.getId();
                 SimpleLinkBean slb = new SimpleLinkBean();
                 slb.dirname.set(dirname);
                 slb.picPath.set(picPath);
@@ -126,6 +127,7 @@ public class LinkModel implements ILinkModel {
                 slb.title.set(title);
                 slb.time.set(time);
                 slb.isGone.set(true);
+                slb.ID.set(ID);
                 simpleLinkbeanList.add(slb);
                 Log.d(TAG, "Link_onNext: "+slb.title.get());
             }

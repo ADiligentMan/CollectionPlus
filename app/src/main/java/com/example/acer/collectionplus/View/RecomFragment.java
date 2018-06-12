@@ -145,6 +145,11 @@ public class RecomFragment extends Fragment implements IUserFragmentView {
 
     }
 
+    @Override
+    public void modifySucess(String msg) {
+
+    }
+
     public static class BannerViewHolder implements MZViewHolder<Integer> {
         private ImageView mImageView;
         @Override

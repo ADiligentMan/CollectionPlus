@@ -7,5 +7,5 @@ import com.example.acer.collectionplus.Base.IBaseView;
  */
 
 public interface IUserFragmentView  extends IBaseView{
-
+     void modifySucess(String msg);
 }

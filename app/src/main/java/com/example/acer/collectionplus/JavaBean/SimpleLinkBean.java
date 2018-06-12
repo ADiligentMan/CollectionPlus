@@ -12,4 +12,5 @@ public class SimpleLinkBean {
     public ObservableField<String> title = new ObservableField<String>();
     public ObservableField<String>  time = new ObservableField<String>();
     public ObservableBoolean isGone = new ObservableBoolean();
+    public ObservableField<String> ID = new ObservableField<String>();
 }

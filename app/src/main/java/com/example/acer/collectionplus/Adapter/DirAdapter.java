@@ -38,7 +38,6 @@ public class DirAdapter extends BaseAdapter<SimpleDirBean,BaseViewHolder> {
     public static final int CLOSE = 2;
     private int status = CLOSE;
     public View lastOpenedView;
-
     private IMainFragmentView view;
     public DirAdapter(Context context,IMainFragmentView view) {
         super(context);
@@ -109,10 +108,11 @@ public class DirAdapter extends BaseAdapter<SimpleDirBean,BaseViewHolder> {
      * 移除某一项
      * @param position
      */
-    public void removeItem(int position){
-
+    public SimpleDirBean removeItem(int position){
+        SimpleDirBean bean= dataSet.get(position);
         dataSet.remove(position);
         notifyDataSetChanged();
+        return  bean;
     }
 
     /**
@@ -122,7 +122,7 @@ public class DirAdapter extends BaseAdapter<SimpleDirBean,BaseViewHolder> {
     public void onClickDelete(final int position){
         Log.d(TAG, "onClickDelete: "+position);
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setIcon(R.mipmap.ic_launcher_round);
+        builder.setIcon(R.mipmap.ic_launcher2);
         builder.setTitle("慎重考虑哦！");
         builder.setMessage("你确定要删除这个收藏夹吗？");
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener(){
@@ -136,10 +136,12 @@ public class DirAdapter extends BaseAdapter<SimpleDirBean,BaseViewHolder> {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //更新前端
-                removeItem(position);
+                SimpleDirBean bean= removeItem(position);
                 //更新后台
-                String dirname = dataSet.get(position).dirname.get();
-                model.deleteDir(dirname);
+                if(bean!=null) {
+                    String dirname = bean.dirname.get();
+                    model.deleteDir(dirname);
+                }
             }
         });
         builder.setNegativeButton("取消",null);
@@ -147,6 +149,8 @@ public class DirAdapter extends BaseAdapter<SimpleDirBean,BaseViewHolder> {
         builder.create().show();
         //点击删除或者重命名后关闭ItemMenu
         colseItemMenu();
+        //关闭itemMenu
+        this.status=CLOSE;
     }
 
     /**
@@ -156,7 +160,7 @@ public class DirAdapter extends BaseAdapter<SimpleDirBean,BaseViewHolder> {
     public void onClickRename(final int position){
         Log.d(TAG, "onClickRename: "+position);
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setIcon(R.mipmap.ic_launcher_round);
+        builder.setIcon(R.mipmap.ic_launcher2);
         builder.setTitle("请输入新名称");
         final View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_rename_dir,null,false);
         builder.setView(view);
@@ -190,6 +194,8 @@ public class DirAdapter extends BaseAdapter<SimpleDirBean,BaseViewHolder> {
         builder.create().show();
         //点击删除或者重命名后关闭ItemMenu
         colseItemMenu();
+        //关闭itemMenu
+        this.status=CLOSE;
 
     }
 
@@ -248,9 +254,5 @@ public class DirAdapter extends BaseAdapter<SimpleDirBean,BaseViewHolder> {
     public int getStatus(){
         return this.status;
     }
-
-
-
-
 }
 

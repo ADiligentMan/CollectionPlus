@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.acer.collectionplus.Helper.SharedHelper;
+import com.example.acer.collectionplus.Helper.ToastUtils;
 import com.example.acer.collectionplus.R;
 import com.example.acer.collectionplus.ViewModel.ChangeVM;
 import com.example.acer.collectionplus.ViewModel.UserVM;
@@ -36,6 +37,13 @@ public class ChangeFragment extends Fragment implements IUserFragmentView {
         binding =(FragmentChangeBinding) DataBindingUtil.inflate(inflater, R.layout.fragment_change,container,false);
         ok_Btn=binding.ChangeButton;
 
+        binding.imageView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                ChangeFragment.this.getActivity().finish();
+            }
+        });
+
         //点击事件传入map
          ok_Btn.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -51,23 +59,10 @@ public class ChangeFragment extends Fragment implements IUserFragmentView {
                  usermap.put("gender",binding.changeGender.getText().toString());
                  Log.d("usermap",usermap.toString());
                  changevm.modifyData(usermap);
-
              }
          });
 
-        
-
-
-
-
-
-
-     
-
-
         return  binding.getRoot();
-
-
     }
 
 
@@ -84,5 +79,11 @@ public class ChangeFragment extends Fragment implements IUserFragmentView {
     @Override
     public void loadFailure(String message) {
 
+    }
+
+    @Override
+    public void modifySucess(String msg) {
+        ToastUtils.show(getActivity(),msg);
+        getActivity().finish();
     }
 }

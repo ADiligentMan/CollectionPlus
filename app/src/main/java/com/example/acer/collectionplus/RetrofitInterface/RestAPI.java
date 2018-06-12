@@ -25,4 +25,6 @@ public interface RestAPI {
 
     @GET(URLConstant.URL_DIRLIST)
     Observable<DirBean> getDirList(@Query("username") String username);
+
+
 }

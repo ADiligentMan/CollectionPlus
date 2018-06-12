@@ -34,7 +34,9 @@ public class ChangeVM implements BaseLoadListener<BaseBean> {
 
     @Override
     public void loadFailure(String message) {
-
+        if(view!=null){
+            view.modifySucess(message);
+        }
     }
 
     @Override

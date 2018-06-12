@@ -141,7 +141,6 @@ public class DialogHelper {
                     AddActivity.actionStart(activity,msg);
                 }
             });
-
         }
     }
 

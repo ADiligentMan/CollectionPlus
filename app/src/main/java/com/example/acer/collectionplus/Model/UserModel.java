@@ -48,8 +48,6 @@ public class UserModel implements IUserModel {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<UserBean>() {
-
-
                     public void onNext(@NonNull UserBean userBean) {
                         Log.i(TAG, "onNext: ");
                         //转化成simplebean
@@ -57,7 +55,6 @@ public class UserModel implements IUserModel {
 
                        UserOnNext(userBean);
                     }
-
                     @Override
                     public void onError(Throwable e) {
                        //Log.d(TAG,simpleUserBean.toString());
@@ -65,7 +62,6 @@ public class UserModel implements IUserModel {
                         Log.i(TAG, "onError: " + e.getMessage());
                         loadListener.loadFailure(e.getMessage());
                     }
-
                     @Override
                     public void onComplete() {
                         Log.i(TAG, "onComplete: ");
@@ -83,7 +79,7 @@ public class UserModel implements IUserModel {
 
     //UserModel层 修改用户信息
     @Override
-    public void modifyuser(BaseLoadListener<BaseBean> loadListener, Map<String, String> usermap) {
+    public void modifyuser(final BaseLoadListener<BaseBean> loadListener, Map<String, String> usermap) {
        Log.d("usermodelmine","success");
        Log.d("modelusermap",usermap.toString());
        //和服务器进行连接
@@ -96,9 +92,7 @@ public class UserModel implements IUserModel {
                 .subscribe(new DisposableObserver<BaseBean>() {
                     @Override
                     public void onNext(BaseBean baseBean) {
-                        issuccess=baseBean.isSuccess();
-                        Log.d("onnext","success");
-
+                        loadListener.loadFailure(baseBean.getInfo());
                     }
 
                     @Override
@@ -128,7 +122,7 @@ public class UserModel implements IUserModel {
         if (entities != null && entities.size() > 0) {
             for (UserBean.Entity entity : entities) {
                 //获取
-                // String dirname = entity.getDirname();
+                 // String dirname = entity.getDirname();
                  String username=entity.getUsername();
                  String password=entity.getPassword();
                  String phone=entity.getPhone();
@@ -162,8 +156,6 @@ public class UserModel implements IUserModel {
                 sub.address.set(address);
 
                simpleUserBeanList.add(sub);
-
-
             }
         }
 

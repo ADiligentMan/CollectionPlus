@@ -13,6 +13,7 @@ import com.example.acer.collectionplus.Base.BaseAdapter;
 import com.example.acer.collectionplus.Base.BaseViewHolder;
 import com.example.acer.collectionplus.JavaBean.SimpleLinkBean;
 import com.example.acer.collectionplus.R;
+import com.example.acer.collectionplus.View.NoteActivity;
 
 public class LinkAdapter extends BaseAdapter<SimpleLinkBean,BaseViewHolder>{
 
@@ -72,5 +73,14 @@ public class LinkAdapter extends BaseAdapter<SimpleLinkBean,BaseViewHolder>{
         intent.setAction(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(value));
         mContext.startActivity(intent);
+    }
+
+    /**
+     *
+     * @param position
+     */
+    public void onClickNote(int position){
+        String linkID = dataSet.get(position).ID.get();
+        NoteActivity.actionStart(mContext,linkID);
     }
 }

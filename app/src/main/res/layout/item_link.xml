@@ -115,6 +115,7 @@
                 android:id="@+id/btn_note"
                 style="@style/BtnsOfLink"
                 android:drawableTop="@drawable/btn_note"
+                android:onClick="@{()->mAdapter.onClickNote(position)}"
                 android:text="笔记" />
             <Button
                 android:id="@+id/btn_delete"

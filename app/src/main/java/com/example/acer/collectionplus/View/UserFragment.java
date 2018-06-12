@@ -249,8 +249,14 @@ public class UserFragment extends Fragment implements IUserFragmentView
     public void setOnButtonClick(OnButtonClick onButtonClick) {
         this.onButtonClick = onButtonClick;
     }
+
+    @Override
+    public void modifySucess(String msg) {
+
+    }
+
     public interface OnButtonClick{
-        public void onClick(View view);
+        void onClick(View view);
     }
     //-------------------------------------------------------------------
     @Override

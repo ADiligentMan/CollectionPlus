@@ -26,6 +26,7 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
  * A simple {@link Fragment} subclass.
  */
 public class MainFragment extends Fragment implements IMainFragmentView {
+    public static View myView;
     public static final String TAG = "MainFragment";
     private FragmentMainBinding binding;
     //about link
@@ -43,8 +44,8 @@ public class MainFragment extends Fragment implements IMainFragmentView {
         initLinkRecycleView();
         this.linkVM = new LinkVM(this, linkAdapter);
         this.dirVM = new DirVM(getActivity(),this, dirAdapter,binding);
-
-        return binding.getRoot();
+        myView = binding.getRoot();
+        return myView;
     }
 
     private void initLinkRecycleView() {
@@ -92,6 +93,13 @@ public class MainFragment extends Fragment implements IMainFragmentView {
 
         binding.xrvDir.setAdapter(dirAdapter);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.initBar(this.getView());
     }
 
     /**

@@ -7,6 +7,7 @@ import java.util.List;
 public class LinkBean extends BaseBean<LinkBean.Entity> {
 
     public static class Entity {
+        private String id;
         private String dirname;
         private String picPath;
         private String value;
@@ -78,6 +79,14 @@ public class LinkBean extends BaseBean<LinkBean.Entity> {
 
         public void setType(String type) {
             this.type = type;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
         }
     }
 }
