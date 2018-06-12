@@ -34,12 +34,20 @@ public interface MainFragment {
 
     //发送验证码
     @GET(URLConstant.URL_SENDEMAIL)
-    Observable<BaseBean> getResultEnsureCode(@Query("email") String email);
+    Observable<BaseBean> getResultEnsureCode(@Query("email") String email,@Query("type") String type);
 
     //注册
 
     @GET(URLConstant.URL_REGISTER)
     Observable<BaseBean> getResultSign(@Query("username") String username, @Query("password") String password,@Query("email") String email, @Query("activeCode") String activeCode);
+
+    //忘记密码1
+    @GET(URLConstant.URL_CHECKENSURECODE)
+    Observable<BaseBean> getResultCheckEn(@Query("email") String email, @Query("activeCode") String activeCode);
+
+    //忘记密码
+    @GET(URLConstant.URL_MODIFYPASSWORD)
+    Observable<BaseBean> getResultPassword(@Query("email") String email, @Query("password") String password);
 
     //重命名收藏夹
     @GET("user/renamedir.do")

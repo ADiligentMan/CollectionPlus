@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.acer.collectionplus">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.LoginActivity" />
+        <activity android:name=".View.StartPageActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
             android:name=".View.MainActivity"
             android:windowSoftInputMode="adjustPan|stateHidden">
@@ -29,9 +29,7 @@
             android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
@@ -50,6 +48,9 @@
         <activity
             android:name=".View.TextActivity"
             android:exported="true" />
+        <activity android:name=".View.ForgetActivity"/>
+        <activity android:name=".View.ForgetActivity2"/>
+        <activity android:name=".View.LoginActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.acer.collectionplus.Base.BaseBean;
 import com.example.acer.collectionplus.Base.BaseLoadListener;
+import com.example.acer.collectionplus.Helper.SharedHelper;
 import com.example.acer.collectionplus.Http.HttpUtils;
 import com.example.acer.collectionplus.JavaBean.ResultBean;
 import com.example.acer.collectionplus.RetrofitInterface.MainFragment;
@@ -13,6 +14,7 @@ import com.example.acer.collectionplus.ViewModel.EnsureCodeVM;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -28,32 +30,33 @@ public class EnsureCodeModel {
     public static final String TAG="EnsureCodeModel";
 
     List<ResultBean> list=new ArrayList<ResultBean>();
-    ResultBean result=new ResultBean();;
+    ResultBean result=new ResultBean();
+    String email,type;
     public void loadData(final BaseLoadListener<ResultBean> loadListener, Map<String, String> params){
-        String email=params.get("email");
+        email=params.get("email");
+        type=params.get("type");
 
         //向服务器发送数据??
-        Observable<BaseBean> observable = HttpUtils.getRetrofit().create(MainFragment.class).getResultEnsureCode(email);
+        Observable<BaseBean> observable = HttpUtils.getRetrofit().create(MainFragment.class).getResultEnsureCode(email,type);
         //两个线程，一个用来给服务器发送请求，一个是主线程负责界面更新
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<BaseBean>(){
                     @Override
                     public void onNext(BaseBean baseBean) {
-                        Log.i(TAG, "onNext: ");
-                        result.success1=baseBean.isSuccess();
-                        result.info1=baseBean.getInfo();
-
+                        try{
+                            Log.i(TAG, "onNext: ");
+                            result.success1=baseBean.isSuccess();
+                            result.info1=baseBean.getInfo();
+                        }catch(NoSuchElementException e){
+                            Log.e(TAG,"NoSuchElementException:"+e);
+                        }
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Log.i(TAG, "onError: "+e.getMessage());
-
-
                         loadListener.loadFailure(e.getMessage());
-
-
                     }
 
                     @Override
@@ -62,6 +65,12 @@ public class EnsureCodeModel {
                         list.add(result);
                         loadListener.loadSuccess(list);
                         loadListener.loadComplete();
+
+                        //如果是忘记密码
+                        //存入sharedPeference里面
+                        Log.i(TAG,email);
+                        Log.i(TAG,type);
+                            SharedHelper.getInstance().setValue("email",email);
                     }
                 });
         }
@@ -101,7 +110,7 @@ public class EnsureCodeModel {
 
                        @Override
                        public void onError(Throwable e) {
-                        //   stopCoding = 1;
+
 
                        }
 
@@ -111,10 +120,6 @@ public class EnsureCodeModel {
                        }
                    }
         );
-
-
-
-
     }
 
 }

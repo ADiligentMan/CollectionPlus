@@ -83,10 +83,11 @@ public class LoginActivity extends AppCompatActivity implements IBaseView {
         Intent intentRegister=new Intent(LoginActivity.this,RegisterActivity.class);
         startActivity(intentRegister);
         Log.d(TAG, "enter Register");
-        finish();
     }
     //跳转至忘记密码界面
     public void ForgetOnClick(){
+        Intent intentForget=new Intent(LoginActivity.this,ForgetActivity.class);
+        startActivity(intentForget);
 
     }
     //进行一些窗口信息的简单判断

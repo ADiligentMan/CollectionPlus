@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="userInfo"
+            type="com.example.acer.collectionplus.JavaBean.SimpleUserDetailInfoBean" />
+    </data>
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbarId"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--app:navigationIcon="?attr/homeAsUpIndicator" />-->
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp"
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="+关注"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:id="@+id/user_detail_info"
+            app:layout_constraintTop_toBottomOf="@id/user">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="50dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/collect_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userInfo.collectNum}"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="收藏"
+                    android:textSize="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/collect_num" />
+            </android.support.constraint.ConstraintLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="5dp"
+                android:background="#ae7f7f" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="50dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/dir_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userInfo.folderNum}"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="收藏夹"
+                    android:textSize="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/dir_num" />
+            </android.support.constraint.ConstraintLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="5dp"
+                android:background="#ae7f7f" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="50dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/fan_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userInfo.fansNum}"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="粉丝"
+                    android:textSize="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/fan_num" />
+            </android.support.constraint.ConstraintLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="5dp"
+                android:background="#ae7f7f" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="50dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/follow_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userInfo.followNum}"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="关注"
+                    android:textSize="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/follow_num" />
+            </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/user_detail_info"
+            android:id="@+id/user_collect">
+
+        </android.support.v7.widget.RecyclerView>
+    </android.support.constraint.ConstraintLayout>
+</layout>

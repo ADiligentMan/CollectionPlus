@@ -17,19 +17,17 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class RegisterModel {
-    public static final String TAG="RegisterModel";
+public class CheckEnsureCodeModel {
+    public static final String TAG="CheckEnsureCodeModel";
     List<ResultBean> list=new ArrayList<ResultBean>();
     ResultBean result=new ResultBean();
 
     public void loadData(final BaseLoadListener<ResultBean> loadListener, Map<String, String> params){
-        String username=params.get("username");
-        String password=params.get("password");
         String email=params.get("email");
         String activeCode=params.get("activeCode");
 
         //向服务器发送数据??
-        Observable<BaseBean> observable = HttpUtils.getRetrofit().create(MainFragment.class).getResultSign(username,password,email,activeCode);
+        Observable<BaseBean> observable = HttpUtils.getRetrofit().create(MainFragment.class).getResultCheckEn(email,activeCode);
         //两个线程，一个用来给服务器发送请求，一个是主线程负责界面更新
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -50,11 +48,9 @@ public class RegisterModel {
                     @Override
                     public void onComplete() {
                         Log.i(TAG, "onComplete: ");
-                       // loadListener.loadComplete();
                         list.add(result);
                         loadListener.loadSuccess(list);
                     }
                 });
     }
-
 }
