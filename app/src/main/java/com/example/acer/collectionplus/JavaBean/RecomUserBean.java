@@ -4,14 +4,14 @@ import com.example.acer.collectionplus.Base.BaseBean;
 
 public class RecomUserBean extends BaseBean<RecomUserBean.Entity> {
     public static class Entity{
-        private String name;
+        private String username;
 
-        public String getName() {
-            return name;
+        public String getUsername() {
+            return username;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setUsername(String username) {
+            this.username = username;
         }
     }
 }

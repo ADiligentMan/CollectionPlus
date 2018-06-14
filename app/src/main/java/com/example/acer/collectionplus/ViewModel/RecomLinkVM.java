@@ -20,7 +20,7 @@ public class RecomLinkVM  implements BaseLoadListener<SimpleRecomLinkBean> {
         initData();
     }
 
-    private void initData() {
+    public void initData() {
         recomLinkModel.loadData(this);
     }
 

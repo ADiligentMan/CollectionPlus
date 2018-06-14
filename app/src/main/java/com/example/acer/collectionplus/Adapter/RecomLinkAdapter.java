@@ -1,8 +1,10 @@
 package com.example.acer.collectionplus.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.net.Uri;
 import android.view.ViewGroup;
 
 import com.example.acer.collectionplus.BR;
@@ -34,6 +36,7 @@ public class RecomLinkAdapter extends BaseAdapter<SimpleRecomLinkBean, BaseViewH
     public void onBindVH(BaseViewHolder holder, int position) {
         ViewDataBinding binding = holder.getBinding();
         binding.setVariable(BR.recomLink,dataSet.get(position));
+        binding.setVariable(BR.recomLinkAdapter, this);
     }
 
     @Override
@@ -44,5 +47,18 @@ public class RecomLinkAdapter extends BaseAdapter<SimpleRecomLinkBean, BaseViewH
     @Override
     public void loadMoreData(List<SimpleRecomLinkBean> data) {
         super.loadMoreData(data);
+    }
+
+    /**
+     * 点击网页后开启一个活动
+     *
+     * @param value 网页
+     *
+     */
+    public void clickLink(String value){
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(value));
+        mContext.startActivity(intent);
     }
 }

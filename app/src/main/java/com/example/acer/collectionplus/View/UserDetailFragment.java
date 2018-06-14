@@ -3,6 +3,7 @@ package com.example.acer.collectionplus.View;
 import android.app.Fragment;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,10 +20,11 @@ import com.example.acer.collectionplus.databinding.FragmentUserDetailBinding;
 public class UserDetailFragment extends Fragment {
     private FragmentUserDetailBinding binding;
     private UserDetailVM userDetailVM;
-    private com.example.acer.Infoionplus.ViewModel.UserDetailInfoVM userDetailInfoVM;
+//    private com.example.acer.Infoionplus.ViewModel.UserDetailInfoVM userDetailInfoVM;
     private UserDetailAdapter userDetailAdapter;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
+    public static SwipeRefreshLayout userSwipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,8 +35,8 @@ public class UserDetailFragment extends Fragment {
 //        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         initUserInfo();
         this.userDetailVM = new UserDetailVM(userDetailAdapter);
-        this.userDetailInfoVM = new UserDetailInfoVM();
-        userDetailInfoVM.getbinding(binding);
+//        this.userDetailInfoVM = new UserDetailInfoVM();
+//        userDetailInfoVM.getbinding(binding);
         return binding.getRoot();
     }
 
@@ -43,11 +45,19 @@ public class UserDetailFragment extends Fragment {
         recyclerView.setHasFixedSize(true);//设置固定大小
         recyclerView.setItemAnimator(new android.support.v7.widget.DefaultItemAnimator());//设置默认动画
         linearLayoutManager =new android.support.v7.widget.LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(android.support.v7.widget.OrientationHelper.HORIZONTAL);//设置滚动方向，横向滚动
+//        linearLayoutManager.setOrientation(android.support.v7.widget.OrientationHelper.HORIZONTAL);//设置滚动方向，横向滚动
         recyclerView.setLayoutManager(linearLayoutManager);
 
         userDetailAdapter=new UserDetailAdapter(getActivity());
         recyclerView.setAdapter(userDetailAdapter);
+
+        userSwipeRefreshLayout = binding.swipe_user_detail;
+        userSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                userDetailVM.initData();
+            }
+        });
     }
 
     private void initUserCollect() {

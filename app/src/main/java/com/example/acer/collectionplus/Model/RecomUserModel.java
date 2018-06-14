@@ -69,7 +69,7 @@ public class RecomUserModel implements IRecomUserModel {
         simpleRecomUserBeanList.clear();
         if (entities != null && entities.size() > 0) {
             for (RecomUserBean.Entity entity : entities) {
-                String name = entity.getName();
+                String name = entity.getUsername();
 
                 SimpleRecomUserBean srb = new SimpleRecomUserBean();
                 srb.name.set(name);

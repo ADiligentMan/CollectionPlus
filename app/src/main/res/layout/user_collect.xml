@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
-            name="recomLink"
-            type="com.example.acer.collectionplus.JavaBean.SimpleRecomLinkBean" />
+            name="userCollect"
+            type="com.example.acer.collectionplus.JavaBean.SimpleUserDetailCollectBean" />
         <variable
-            name="recomLinkAdapter"
-            type="com.example.acer.collectionplus.Adapter.RecomLinkAdapter" />
+            name="userDetailAdapter"
+            type="com.example.acer.collectionplus.Adapter.UserDetailAdapter" />
     </data>
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,16 +15,15 @@
         android:background="@drawable/recom_user_border"
         android:padding="4dp"
         android:layout_marginTop="5dp"
-        android:onClick="@{()->recomLinkAdapter.clickLink(recomLink.value)}">
+        android:onClick="@{()->userDetailAdapter.clickLink(userCollect.value)}">
         <ImageView
             android:layout_width="80dp"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_foreground"
-            android:id="@+id/recom_link_image"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:imageUrl="@{recomLink.picPath}"
+            app:imageUrl="@{userCollect.picPath}"
             android:layout_weight="0"/>
         <TextView
             android:layout_width="match_parent"
@@ -32,13 +31,13 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_weight="1"
-            android:text="@{recomLink.title}"/>
+            android:text="@{userCollect.title}"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
             android:layout_weight="1"
-            android:text="@{recomLink.date}"/>
+            android:text="@{userCollect.date}"/>
     </android.support.constraint.ConstraintLayout>
 </layout>

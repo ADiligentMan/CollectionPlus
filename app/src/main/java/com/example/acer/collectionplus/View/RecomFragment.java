@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -31,6 +32,7 @@ public class RecomFragment extends Fragment implements IUserFragmentView {
     private RecomUserAdapter recomUserAdapter;
     private RecomLinkVM recomLinkVM;
     private RecomLinkAdapter recomLinkAdapter;
+    public static SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView lRecyclerView;
     LinearLayoutManager lLayoutManager;
     RecyclerView uRecyclerView;
@@ -85,6 +87,14 @@ public class RecomFragment extends Fragment implements IUserFragmentView {
 
         recomLinkAdapter=new RecomLinkAdapter(getActivity());
         lRecyclerView.setAdapter(recomLinkAdapter);
+
+        swipeRefreshLayout = binding.swipeRecom;
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                recomLinkVM.initData();
+            }
+        });
     }
 
     private void initRecomUser() {

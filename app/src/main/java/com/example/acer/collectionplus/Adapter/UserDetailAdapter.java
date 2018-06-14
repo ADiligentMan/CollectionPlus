@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.net.Uri;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -31,7 +33,7 @@ public class UserDetailAdapter extends BaseAdapter<SimpleUserDetailCollectBean, 
 
     @Override
     public BaseViewHolder onCreateVH(ViewGroup parent, int viewType) {
-        ViewDataBinding binding = DataBindingUtil.inflate(inflater, R.layout.user_detail_collect, parent,false);
+        ViewDataBinding binding = DataBindingUtil.inflate(inflater, R.layout.user_collect, parent,false);
         return new BaseViewHolder(binding);
     }
 
@@ -39,6 +41,7 @@ public class UserDetailAdapter extends BaseAdapter<SimpleUserDetailCollectBean, 
     public void onBindVH(BaseViewHolder holder, int position) {
         ViewDataBinding binding = holder.getBinding();
         binding.setVariable(BR.userCollect,dataSet.get(position));
+        binding.setVariable(BR.userDetailAdapter, this);
     }
 
     @Override
@@ -49,5 +52,18 @@ public class UserDetailAdapter extends BaseAdapter<SimpleUserDetailCollectBean, 
     @Override
     public void loadMoreData(List<SimpleUserDetailCollectBean> data) {
         super.loadMoreData(data);
+    }
+
+    /**
+     * 点击网页后开启一个活动
+     *
+     * @param value 网页
+     *
+     */
+    public void clickLink(String value){
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(value));
+        mContext.startActivity(intent);
     }
 }
