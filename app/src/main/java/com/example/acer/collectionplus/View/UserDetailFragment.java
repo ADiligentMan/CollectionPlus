@@ -51,7 +51,7 @@ public class UserDetailFragment extends Fragment {
         userDetailAdapter=new UserDetailAdapter(getActivity());
         recyclerView.setAdapter(userDetailAdapter);
 
-        userSwipeRefreshLayout = binding.swipe_user_detail;
+        userSwipeRefreshLayout = binding.swipeUserDetail;
         userSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
