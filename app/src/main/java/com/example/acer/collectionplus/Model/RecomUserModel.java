@@ -3,11 +3,14 @@ package com.example.acer.collectionplus.Model;
 import android.util.Log;
 
 import com.example.acer.collectionplus.Base.BaseLoadListener;
+import com.example.acer.collectionplus.Helper.SharedHelper;
 import com.example.acer.collectionplus.Helper.TimeHelper;
 import com.example.acer.collectionplus.Http.HttpUtils;
+import com.example.acer.collectionplus.JavaBean.RecomLinkBean;
 import com.example.acer.collectionplus.JavaBean.RecomUserBean;
 import com.example.acer.collectionplus.JavaBean.SimpleLinkBean;
 import com.example.acer.collectionplus.JavaBean.SimpleRecomUserBean;
+import com.example.acer.collectionplus.RetrofitInterface.RecomLinkHttp;
 import com.example.acer.collectionplus.RetrofitInterface.RecomUserHttp;
 
 import java.util.ArrayList;
@@ -25,7 +28,9 @@ public class RecomUserModel implements IRecomUserModel {
 
     @Override
     public void loadData(final BaseLoadListener<SimpleRecomUserBean> loadListener) {
-        Observable<RecomUserBean> observable1 = HttpUtils.getRetrofit().create(RecomUserHttp.class).getRecomUser();
+        //通过shareshelper得到用户名数据
+        final String username = SharedHelper.getInstance().getValue("username");
+        Observable<RecomUserBean> observable1 = HttpUtils.getRetrofit().create(RecomUserHttp.class).getRecomUser(username);
 
         //加载所有收藏
         observable1.subscribeOn(Schedulers.io())

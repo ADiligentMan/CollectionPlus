@@ -53,7 +53,7 @@ public class RecomUserAdapter extends BaseAdapter<SimpleRecomUserBean, BaseViewH
     }
 
     public void clickUser(String userName) {
-        Toast.makeText(mContext, "444", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mContext, "444", Toast.LENGTH_SHORT).show();
         // 进入user界面
         FragmentManager manager = ((Activity)mContext).getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
