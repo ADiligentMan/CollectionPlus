@@ -48,6 +48,7 @@ import com.example.acer.collectionplus.R;
 import com.example.acer.collectionplus.UIUtils.ImageUtils;
 import com.example.acer.collectionplus.ViewModel.UserVM;
 import com.example.acer.collectionplus.databinding.FragmentUserBinding;
+import com.leon.lib.settingview.LSettingItem;
 //import com.leon.lib.settingview.LSettingItem;
 
 import java.io.ByteArrayInputStream;
@@ -79,8 +80,8 @@ public class UserFragment extends Fragment implements IUserFragmentView
     private ImageView photo;
     //private LSettingItem  change_Item;
     private ImageView change_image;
-
-
+    private LSettingItem change_password;
+    private LSettingItem show_history;
     private static final int  CODE_GALLERY_REQUEST = 0xa0;
     private static final int  CODE_CAMERA_REQUEST  = 0xa1;
     private static final int  CODE_RESULT_REQUEST  = 0xa2;
@@ -93,7 +94,7 @@ public class UserFragment extends Fragment implements IUserFragmentView
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d("aaa","进来啦");
+
         binding=DataBindingUtil.inflate(inflater,R.layout.fragment_user,container,false);
 
         this.userVM = new UserVM(this);
@@ -110,10 +111,11 @@ public class UserFragment extends Fragment implements IUserFragmentView
                 showChoosePicDialog(v);
             }
         });
+
         //点击跳转修改信息界面
         //设置点击事件
         change_image=binding.setButton;
-       change_image.setOnClickListener(new View.OnClickListener() {
+        change_image.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                Intent intent = new Intent(getActivity(), ChangeActivity.class);
@@ -121,7 +123,25 @@ public class UserFragment extends Fragment implements IUserFragmentView
 
            }
        });
-
+       //修改密码点击事件
+       change_password=binding.itemOne;
+       change_password.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
+           @Override
+           public void click() {
+               //修改
+               Intent intent = new Intent(getActivity(), ChangeActivity.class);
+               startActivity(intent);
+           }
+       });
+        //浏览历史点击事件
+        show_history=binding.history;
+        show_history.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
+            @Override
+            public void click() {
+                Intent intent = new Intent(getActivity(), HistoryActivity.class);
+                startActivity(intent);
+            }
+        });
         //为fragment绑定用户界面
         return binding.getRoot();
     }
@@ -249,14 +269,8 @@ public class UserFragment extends Fragment implements IUserFragmentView
     public void setOnButtonClick(OnButtonClick onButtonClick) {
         this.onButtonClick = onButtonClick;
     }
-
-    @Override
-    public void modifySucess(String msg) {
-
-    }
-
     public interface OnButtonClick{
-        void onClick(View view);
+        public void onClick(View view);
     }
     //-------------------------------------------------------------------
     @Override
