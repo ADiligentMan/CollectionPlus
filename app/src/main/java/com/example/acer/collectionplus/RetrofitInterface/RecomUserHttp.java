@@ -9,5 +9,5 @@ import retrofit2.http.Query;
 
 public interface RecomUserHttp {
     @GET(URLConstant.URL_GET_RECOM_USER)
-    Observable<RecomUserBean> getRecomUser();
+    Observable<RecomUserBean> getRecomUser(@Query("username") String username);
 }

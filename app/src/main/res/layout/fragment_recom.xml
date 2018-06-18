@@ -57,12 +57,18 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/arrow_right" />
             </LinearLayout>
-            <android.support.v7.widget.RecyclerView
+            <android.support.v4.widget.SwipeRefreshLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/recy_recom_link">
+                android:id="@+id/swipe_recom">
 
-            </android.support.v7.widget.RecyclerView>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recy_recom_link">
+
+                </android.support.v7.widget.RecyclerView>
+            </android.support.v4.widget.SwipeRefreshLayout>
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 </layout>

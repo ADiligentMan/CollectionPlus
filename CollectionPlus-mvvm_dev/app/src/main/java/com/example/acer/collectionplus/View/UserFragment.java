@@ -39,8 +39,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+
+//import com.example.acer.collectionplus.Adapter.UserAdapter;
+
+import com.example.acer.collectionplus.Helper.SharedHelper;
 import com.example.acer.collectionplus.R;
 
+import com.example.acer.collectionplus.UIUtils.ImageUtils;
 import com.example.acer.collectionplus.ViewModel.UserVM;
 import com.example.acer.collectionplus.databinding.FragmentUserBinding;
 import com.leon.lib.settingview.LSettingItem;
@@ -264,12 +269,6 @@ public class UserFragment extends Fragment implements IUserFragmentView
     public void setOnButtonClick(OnButtonClick onButtonClick) {
         this.onButtonClick = onButtonClick;
     }
-
-    @Override
-    public void modifySucess(String msg) {
-
-    }
-
     public interface OnButtonClick{
         public void onClick(View view);
     }

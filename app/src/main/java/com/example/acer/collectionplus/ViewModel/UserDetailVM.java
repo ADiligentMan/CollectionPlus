@@ -17,7 +17,7 @@ import java.util.List;
 public class UserDetailVM implements BaseLoadListener<SimpleUserDetailCollectBean> {
     private UserDetailAdapter userDetailAdapter;
     private UserDetailCollectModel userDetailCollectModel;
-    private FragmentUserDetailBinding fragmentUserDetailBinding;
+//    private FragmentUserDetailBinding fragmentUserDetailBinding;
 
     public UserDetailVM(UserDetailAdapter userDetailAdapter) {
         this.userDetailAdapter = userDetailAdapter;
@@ -25,7 +25,7 @@ public class UserDetailVM implements BaseLoadListener<SimpleUserDetailCollectBea
         initData();
     }
 
-    private void initData() {
+    public void initData() {
         userDetailCollectModel.loadData(this);
     }
 
