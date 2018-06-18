@@ -6,7 +6,9 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.media.Image;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.acer.collectionplus.BR;
@@ -17,6 +19,7 @@ import com.example.acer.collectionplus.R;
 import com.example.acer.collectionplus.View.UserDetailFragment;
 
 import java.util.List;
+import java.util.Random;
 
 public class RecomUserAdapter extends BaseAdapter<SimpleRecomUserBean, BaseViewHolder> {
 
@@ -37,9 +40,15 @@ public class RecomUserAdapter extends BaseAdapter<SimpleRecomUserBean, BaseViewH
 
     @Override
     public void onBindVH(BaseViewHolder holder, int position) {
+        int[] avatars = {R.drawable.avatar1, R.drawable.avatar2, R.drawable.avatar3, R.drawable.avatar4};
+        Random rand = new Random();
+//        int randInt = rand.nextInt(4);
+        int avatarInt = position % 4;
         ViewDataBinding binding = holder.getBinding();
         binding.setVariable(BR.recomUserBean,dataSet.get(position));
         binding.setVariable(BR.recomUserAdapter, this);
+        ImageView imageView = binding.getRoot().findViewById(R.id.recom_user_image);
+        imageView.setImageResource(avatars[avatarInt]);
     }
 
     @Override
