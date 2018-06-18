@@ -2,7 +2,9 @@ package com.example.acer.collectionplus.View;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +23,11 @@ import com.example.acer.collectionplus.ViewModel.RecomUserVM;
 import com.example.acer.collectionplus.databinding.FragmentRecomBinding;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZViewHolder;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.http.Url;
 
 public class RecomFragment extends Fragment implements IUserFragmentView {
 
@@ -56,16 +63,22 @@ public class RecomFragment extends Fragment implements IUserFragmentView {
     {
         mMZBanner = binding.banner;
         //资源文件
-        int[] RES = {R.drawable.image1, R.drawable.image1, R.drawable.image1};
+        int[] RES = {R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4};
         // 设置数据
         java.util.List<Integer> list = new java.util.ArrayList<>();
+        final List<String> urlList = new ArrayList<>();
         for (int i = 0; i < RES.length; i++) {
             list.add(RES[i]);
+            urlList.add("http://baidu.com");
         }
         // 设置页面点击事件
         mMZBanner.setBannerPageClickListener(new MZBannerView.BannerPageClickListener() {
             @Override
             public void onPageClick(View view, int position) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(urlList.get(position)));
+                getActivity().startActivity(intent);
 //                android.widget.Toast.makeText(getContext(), "click page:" + position, android.widget.Toast.LENGTH_LONG).show();
             }
         });

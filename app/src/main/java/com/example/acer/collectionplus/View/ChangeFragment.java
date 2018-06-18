@@ -98,4 +98,9 @@ public class ChangeFragment extends Fragment implements IUserFragmentView {
     public void loadFailure(String message) {
 
     }
+
+    @Override
+    public void modifySucess(String msg) {
+
+    }
 }
