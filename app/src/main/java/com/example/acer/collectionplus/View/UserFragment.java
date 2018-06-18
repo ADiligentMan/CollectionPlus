@@ -39,31 +39,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-
-//import com.example.acer.collectionplus.Adapter.UserAdapter;
-
-import com.example.acer.collectionplus.Helper.SharedHelper;
 import com.example.acer.collectionplus.R;
 
-import com.example.acer.collectionplus.UIUtils.ImageUtils;
 import com.example.acer.collectionplus.ViewModel.UserVM;
 import com.example.acer.collectionplus.databinding.FragmentUserBinding;
-//import com.leon.lib.settingview.LSettingItem;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-
-import static android.support.v4.content.PermissionChecker.checkSelfPermission;
-import static com.example.acer.collectionplus.View.PhotoUtils.getDataColumn;
-import static com.example.acer.collectionplus.View.PhotoUtils.isDownloadsDocument;
-import static com.example.acer.collectionplus.View.PhotoUtils.isExternalStorageDocument;
-import static com.example.acer.collectionplus.View.PhotoUtils.isGooglePhotosUri;
-import static com.example.acer.collectionplus.View.PhotoUtils.isMediaDocument;
 
 
 public class UserFragment extends Fragment implements IUserFragmentView
