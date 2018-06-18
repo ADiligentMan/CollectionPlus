@@ -32,6 +32,12 @@ public class ChangeFragment extends Fragment implements IUserFragmentView {
     private Map<String,String> usermap;
     private Button ok_Btn;
     private ImageView back_image;
+
+    @Override
+    public void modifySucess(String msg) {
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,25 +68,10 @@ public class ChangeFragment extends Fragment implements IUserFragmentView {
          back_image.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-
-                Intent intent = new Intent(getActivity(),MainActivity.class);
-               startActivity(intent);
+                getActivity().finish();
              }
          });
-
-        
-
-
-
-
-
-
-     
-
-
         return  binding.getRoot();
-
-
     }
 
 

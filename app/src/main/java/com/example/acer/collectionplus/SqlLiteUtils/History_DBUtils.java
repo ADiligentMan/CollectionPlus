@@ -29,7 +29,7 @@ private SQLiteDatabase db;
     public void insert_hsitory(int id,String value,String time){
         ContentValues values=new ContentValues();
         //插入数据
-        values.put("id",id);
+
         values.put("value",value);
         values.put("time",time);
         this.db.insert("history",null,values);

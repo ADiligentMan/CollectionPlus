@@ -31,6 +31,7 @@ public class DirVM implements BaseLoadListener<SimpleDirBean>{
     DirAdapter mAdapter;
     Context mContext;
     ViewDataBinding binding;
+
     public DirVM(Context mContext, IMainFragmentView view, DirAdapter mAdapter,ViewDataBinding binding){
         this.binding = binding;
         this.mContext = mContext;
@@ -95,7 +96,7 @@ public class DirVM implements BaseLoadListener<SimpleDirBean>{
     public void onClickAddDir() {
         Log.d(TAG, "onClickAddDir: ");
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setIcon(R.mipmap.ic_launcher_round);
+        builder.setIcon(R.mipmap.ic_launcher2);
         builder.setTitle("请输入新名称");
         final View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_rename_dir,null,false);
         builder.setView(view);

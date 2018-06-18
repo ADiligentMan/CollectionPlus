@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,8 +99,9 @@ public class MainFragment extends Fragment implements IMainFragmentView {
     @Override
     public void onResume() {
         super.onResume();
-        MainActivity mainActivity = (MainActivity) getActivity();
-        mainActivity.initBar(this.getView());
+        Log.d(TAG, "onResume: "+"执行");
+       MainActivity mainActivity = (MainActivity) getActivity();
+       mainActivity.initBar(this.getView());
     }
 
     /**

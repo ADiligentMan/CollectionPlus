@@ -64,8 +64,6 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
         if (!db.isReadOnly()) {
             // 启动外键
             db.execSQL("PRAGMA foreign_keys = 1;");
-
-
             String query = String.format("PRAGMA foreign_keys = %s", "ON");
             db.execSQL(query);
         }
