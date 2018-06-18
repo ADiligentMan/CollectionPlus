@@ -61,6 +61,7 @@
 
         <activity android:name=".View.ChangeActivity" />
         <activity android:name=".View.NoteActivity"></activity>
+        <activity android:name=".View.HistoryActivity"/>
     </application>
 
 </manifest>

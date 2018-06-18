@@ -124,7 +124,7 @@ public class UserFragment extends Fragment implements IUserFragmentView
            @Override
            public void click() {
                //修改
-               Intent intent = new Intent(getActivity(), ChangeActivity.class);
+               Intent intent = new Intent(getActivity(), ForgetActivity.class);
                startActivity(intent);
            }
        });

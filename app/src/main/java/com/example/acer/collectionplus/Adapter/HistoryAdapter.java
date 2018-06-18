@@ -18,7 +18,7 @@ import java.util.List;
  */
 //浏览历史列表
 public class HistoryAdapter extends ArrayAdapter<HistoryBean> {
-private int resourceId;
+    private int resourceId;
 
     public HistoryAdapter(@NonNull Context context,int textViewResourceId, @NonNull List<HistoryBean> objects) {
         super(context,textViewResourceId, objects);
@@ -29,14 +29,33 @@ private int resourceId;
     public View getView(int position, View convertView, ViewGroup parent){
         HistoryBean historyBean=getItem(position);
         View view=LayoutInflater.from(getContext()).inflate(resourceId,parent,false);
+        ViewHolder viewHolder;
+        if(convertView==null){
+            view = LayoutInflater.from(getContext()).inflate(resourceId, parent, false);
+            viewHolder = new ViewHolder();
+            viewHolder.history_value=(TextView)view.findViewById(R.id.history_value);
+            viewHolder.history_time=(TextView)view.findViewById(R.id.history_time);
+            view.setTag(viewHolder);
+        }
+        else{
+            view = convertView;
+            viewHolder = (ViewHolder) view.getTag(); // 重新获取ViewHolder
+        }
 
-        TextView value_text=view.findViewById(R.id.history_value);
-        TextView time_text=view.findViewById(R.id.history_time);
+
+        // TextView value_text=view.findViewById(R.id.history_value);
+        //TextView time_text=view.findViewById(R.id.history_time);
 
 
-        value_text.setText(historyBean.getValue());
-        time_text.setText(historyBean.getTime());
+        viewHolder.history_value.setText(historyBean.getValue());
+        viewHolder.history_time.setText(historyBean.getTime());
         return view;
+
+    }
+    //ViewHolder类
+    class ViewHolder{
+        TextView history_value;
+        TextView history_time;
 
     }
 }

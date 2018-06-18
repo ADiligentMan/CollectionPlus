@@ -10,16 +10,12 @@ public class FragmentFactory {
         Fragment fragment = null;
         switch (checkedId){
             case R.id.bottom_home:
-
                 break;
             case R.id.bottom_find:
-                break;
-            case R.id.bottom_link:
                 break;
             case R.id.bottom_mime:
                 break;
         }
-
         return fragment;
     }
 

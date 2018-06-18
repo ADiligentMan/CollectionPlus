@@ -39,12 +39,6 @@
                 android:text="发现" />
 
             <RadioButton
-                android:id="@+id/bottom_link"
-                style="@style/CustomRadioBtn"
-                android:drawableTop="@drawable/radiobtn_like"
-                android:text="关注" />
-
-            <RadioButton
                 android:id="@+id/bottom_mime"
                 style="@style/CustomRadioBtn"
                 android:drawableTop="@drawable/radiobtn_mine"
