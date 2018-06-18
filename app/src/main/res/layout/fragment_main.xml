@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="#dbf7f5f5"
+            android:background="#cfffffff"
             android:orientation="vertical">
             <com.jcodecraeer.xrecyclerview.XRecyclerView
 
@@ -44,6 +44,7 @@
                 android:onClick="@{()->mDirVM.onClickAddDir()}"
                 android:background="@drawable/shape_adddir_button"
                 android:layout_width="match_parent"
+                android:textColor="#ffffff"
                 android:layout_height="60dp"
                 android:text="创建"/>
 

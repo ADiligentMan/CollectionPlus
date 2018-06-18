@@ -17,6 +17,7 @@ import com.example.acer.collectionplus.R;
 import com.example.acer.collectionplus.SqlLiteUtils.History_DBUtils;
 import com.example.acer.collectionplus.SqlLiteUtils.SQLiteDbHelper;
 import com.example.acer.collectionplus.View.NoteActivity;
+import com.example.acer.collectionplus.ViewModel.TimerVM;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -113,5 +114,24 @@ public class LinkAdapter extends BaseAdapter<SimpleLinkBean,BaseViewHolder>{
    public void onClickNote(int position){
         String linkID = dataSet.get(position).ID.get();
         NoteActivity.actionStart(mContext,linkID);
+    }
+
+    //点击分享
+    public void clickShare(String value){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT,mContext.getString(R.string.action_share));
+        intent.putExtra(Intent.EXTRA_TEXT, value);//分享链接的uri
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//为Activity新建一个任务栈
+        mContext.startActivity(Intent.createChooser(intent,mContext.getString(R.string.action_share)));
+    }
+
+    /**
+     * 定时
+     */
+    public void clickTimer(){
+        TimerVM timerVM=new TimerVM(mContext);
+        //弹框显示日期、时间选择
+        timerVM.showDialogPick();
     }
 }

@@ -77,7 +77,7 @@ public class ChangeFragment extends Fragment implements IUserFragmentView {
 
     @Override
     public void loadStart(int loadType) {
-        
+
 
     }
 

@@ -62,6 +62,24 @@
         <activity android:name=".View.ChangeActivity" />
         <activity android:name=".View.NoteActivity"></activity>
         <activity android:name=".View.HistoryActivity"/>
+
+        <receiver
+            android:name=".Helper.AlarmReciver"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":newinst">
+
+            <!-- 静态注册广播 -->
+            <!-- intent过滤器,指定可以匹配哪些intent, 一般需要定义action 可以是自定义的也可是系统的 -->
+            <intent-filter>
+                <!-- action -->
+                <action android:name=".View.MainActivity" />
+                <action android:name=".View.TimerActivity"/>
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".View.TimerActivity"
+            android:theme="@style/Theme.AppCompat.Dialog"/>
     </application>
 
 </manifest>

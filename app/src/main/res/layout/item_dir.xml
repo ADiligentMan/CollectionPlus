@@ -22,9 +22,10 @@
     <LinearLayout
         android:id="@+id/move_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@drawable/pressed_selector"
         android:layout_margin="4dp"
+        android:gravity="center_vertical"
         android:onLongClick="@{mAdapter::onLongClick}"
         android:onClick="@{(view)->mView.changeDir(view,dirBean.dirname.get(),position)}"
         android:orientation="horizontal"
@@ -40,11 +41,11 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="3"
                 android:drawableLeft="@drawable/ajust_directory2"
-                android:drawablePadding="30dp"
+                android:drawablePadding="20dp"
                 android:gravity="center_vertical"
                 android:padding="5dp"
                 android:text="@{dirBean.dirname}"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 tools:text="Java" />
 
             <TextView

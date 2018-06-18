@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <layer-list>
-            <item android:height="48dp" android:width="48dp" android:drawable="@drawable/directory2"/>
+            <item android:height="30dp" android:width="30dp" android:drawable="@drawable/dir"/>
         </layer-list>
     </item>
 </selector>

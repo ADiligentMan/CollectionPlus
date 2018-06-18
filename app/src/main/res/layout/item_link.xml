@@ -126,12 +126,14 @@
                 android:id="@+id/btn_share"
                 style="@style/BtnsOfLink"
                 android:drawableTop="@drawable/btn_share"
-                android:text="分享" />
+                android:text="分享"
+                android:onClick="@{()->mAdapter.clickShare(mBean.value)}"/>
             <Button
                 android:id="@+id/btn_clock"
                 style="@style/BtnsOfLink"
                 android:drawableTop="@drawable/btn_clock"
-                android:text="定时" />
+                android:text="定时"
+                android:onClick="@{()->mAdapter.clickTimer()}"/>
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>
     </com.dd.ShadowLayout>
