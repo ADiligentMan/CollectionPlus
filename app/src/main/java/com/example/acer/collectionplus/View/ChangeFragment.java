@@ -34,11 +34,6 @@ public class ChangeFragment extends Fragment implements IUserFragmentView {
     private ImageView back_image;
 
     @Override
-    public void modifySucess(String msg) {
-
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //创建对象
