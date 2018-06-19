@@ -14,7 +14,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.RadioGroup;
 
@@ -25,15 +24,14 @@ import com.example.acer.collectionplus.ViewModel.MainVM;
 import com.example.acer.collectionplus.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-
     public static final String TAG = "MainActivity";
     private Toolbar toolbar;
-    private Toolbar otherToolbar;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     ActivityMainBinding binding;
     MainFragment mainFragment;
     UserFragment userFragment;
+    Fragment currFragment;
     RecomFragment recomFragment;
     MainVM mainVM;
 
@@ -43,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mainVM = new MainVM(getApplicationContext());
-
         initToolbar();
         initFragment();
         initRadioGruop();
@@ -54,7 +51,9 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("收藏夹");//设置Toolbar标题
         toolbar.setTitleTextColor(Color.parseColor("#ffffff")); //设置标题颜色
         setSupportActionBar(toolbar);
+
         getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -62,13 +61,8 @@ public class MainActivity extends AppCompatActivity {
      * 刚开始进来加载第一个fragment
      */
     private void initFragment() {
-        FragmentManager manager = getFragmentManager();
-        FragmentTransaction mTransaction = manager.beginTransaction();
-        if( mainFragment == null){
-            mainFragment = new MainFragment();
-            addFragment(mainFragment,mTransaction);
-        }
-        showFragment(mainFragment,mTransaction);
+        mainFragment = mainFragment == null ? new MainFragment() : mainFragment;
+        replaceFragment(mainFragment);
     }
 
     @Override
@@ -89,43 +83,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 Log.d("click","success");
-                FragmentManager manager = getFragmentManager();
-                FragmentTransaction mTransaction = manager.beginTransaction();
                 Fragment fragment = null;
                 switch (checkedId) {
                     case R.id.bottom_home:
-                        if( mainFragment == null){
-                            mainFragment = new MainFragment();
-                            addFragment(mainFragment,mTransaction);
-                        }
+                        mainFragment = mainFragment == null ? new MainFragment() : mainFragment;
                         fragment = mainFragment;
                         break;
                     case R.id.bottom_find:
-                        if(recomFragment ==null){
-                            recomFragment = new RecomFragment();
-                            addFragment(recomFragment,mTransaction);
-                        }
+                        recomFragment = recomFragment == null ? new RecomFragment() : recomFragment;
                         fragment = recomFragment;
                         break;
                     case R.id.bottom_mime:
-                        if(userFragment == null){
-                            userFragment = new UserFragment();
-                            addFragment(userFragment,mTransaction);
-                        }
+                        userFragment = userFragment == null ? new UserFragment() : userFragment;
                         fragment = userFragment;
                         break;
                 }
-                showFragment(fragment,mTransaction);
+                replaceFragment(fragment);
             }
         });
-    }
-
-    /**
-     * 每个fragment第一次初始话时，add
-     * @param fragment
-     */
-    private void addFragment(Fragment fragment,FragmentTransaction mTransaction){
-        mTransaction.add(R.id.container_fragment,fragment);
     }
 
     /**
@@ -133,23 +108,18 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param fragment
      */
-    private void showFragment(Fragment fragment,FragmentTransaction mTransaction) {
-        //先隐藏所有的fragment
-        if(this.mainFragment!= null)mTransaction.hide(mainFragment);
-        if(this.recomFragment!=null)mTransaction.hide(recomFragment);
-        if(this.userFragment!=null)mTransaction.hide(userFragment);
-
-        //再显示需要显示的Fragment
-       mTransaction.show(fragment);
-       mTransaction.commit();
+    private void replaceFragment(Fragment fragment) {
+        currFragment = fragment;
+        if (fragment == null) return;
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.container_fragment, fragment);
+        transaction.commit();
     }
 
-    /**
-     * 初始化DrawerLayout
-     * @param view
-     */
     public void initBar(View view) {
         if (view != null) {
+            Log.d(TAG, "replaceFragment: " + "已执行");
             mDrawerLayout = (DrawerLayout) view.findViewById(R.id.drawerlayout);
         }
         //创建返回键，并实现打开关/闭监听
