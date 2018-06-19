@@ -39,8 +39,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+
+//import com.example.acer.collectionplus.Adapter.UserAdapter;
+
+import com.example.acer.collectionplus.Helper.SharedHelper;
 import com.example.acer.collectionplus.R;
 
+import com.example.acer.collectionplus.UIUtils.ImageUtils;
 import com.example.acer.collectionplus.ViewModel.UserVM;
 import com.example.acer.collectionplus.databinding.FragmentUserBinding;
 import com.leon.lib.settingview.LSettingItem;
@@ -77,6 +82,8 @@ public class UserFragment extends Fragment implements IUserFragmentView
     private ImageView change_image;
     private LSettingItem change_password;
     private LSettingItem show_history;
+    private LSettingItem quit;
+    private LSettingItem help;
     private static final int  CODE_GALLERY_REQUEST = 0xa0;
     private static final int  CODE_CAMERA_REQUEST  = 0xa1;
     private static final int  CODE_RESULT_REQUEST  = 0xa2;
@@ -134,6 +141,28 @@ public class UserFragment extends Fragment implements IUserFragmentView
             @Override
             public void click() {
                 Intent intent = new Intent(getActivity(), HistoryActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        //退出点击事件
+        quit=binding.quit;
+        quit.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
+            @Override
+            public void click() {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
+        //帮助与客服点击事件
+        help=binding.help;
+        help.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
+            @Override
+            public void click() {
+                Intent intent = new Intent(getActivity(), HelpActivity.class);
                 startActivity(intent);
             }
         });

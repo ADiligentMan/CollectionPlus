@@ -21,8 +21,6 @@ public class StartPageActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                //初始化 sharedPrefenrence
-                SharedHelper.getInstance().initShared(getApplicationContext());
                 Intent intentIN=new Intent(StartPageActivity.this, LoginActivity.class);
                 startActivity(intentIN);
                 StartPageActivity.this.finish();

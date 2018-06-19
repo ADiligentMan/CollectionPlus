@@ -56,9 +56,7 @@ public class ForgetActivity extends AppCompatActivity implements IEnsureCodeView
     }
 
     public void backOnClick(){
-            //登录完成后，返回登录界面
-            Intent intent=new Intent(ForgetActivity.this,LoginActivity.class);
-            this.startActivity(intent);
+            //登录完成后，返回登录界
             finish();
         }
 

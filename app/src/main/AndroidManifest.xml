@@ -12,15 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".View.StartPageActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity
-            android:name=".View.MainActivity"
             android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".View.MainActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity android:name=".View.AddActivity"
             android:windowSoftInputMode="adjustPan|stateHidden">
@@ -48,6 +49,7 @@
         <activity android:name=".View.ForgetActivity"/>
         <activity android:name=".View.ForgetActivity2"/>
         <activity android:name=".View.LoginActivity"/>
+        <activity android:name=".View.HelpActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

@@ -32,6 +32,8 @@ public class LoginActivity extends AppCompatActivity implements IBaseView {
         super.onCreate(savedInstanceState);
         //VM绑定VIEW
         bindingLogin= DataBindingUtil.setContentView(this, R.layout.activity_log);
+        //初始化 sharedPrefenrence
+        SharedHelper.getInstance().initShared(getApplicationContext());
         this.userVM = new LoginVM(this);
         bindingLogin.setMview(this);
 

@@ -25,7 +25,7 @@ public class UserVM implements BaseLoadListener<SimpleUserBean> {
         userModel = new UserModel();
         //设置数据
 
-        // initData();
+        initData();
     }
 
     //初始化数据
@@ -40,8 +40,7 @@ public class UserVM implements BaseLoadListener<SimpleUserBean> {
     public void loadSuccess(List<SimpleUserBean> list) {
         VM_binding.userIntroduce.setText(list.get(0).introduce.get());
         VM_binding.userName.setText(list.get(0).username.get());
-        VM_binding.userLikenumber.setText(list.get(0).likenumber.get());
-        VM_binding.userFunumber.setText(list.get(0).funnumber.get());
+
 
 
     }

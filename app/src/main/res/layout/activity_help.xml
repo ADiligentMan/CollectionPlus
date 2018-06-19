@@ -1,9 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.acer.collectionplus.View.HelpActivity">
+    xmlns:leon="http://schemas.android.com/apk/res-auto"
 
-</android.support.constraint.ConstraintLayout>
+    >
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="600dp"
+
+            android:layout_height="50dp"
+            android:background="#454fb0"
+            android:orientation="horizontal"></LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@+id/linearLayout"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="13dp"
+            android:src="@drawable/back_btn" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="帮助与客服"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignStart="@+id/imageView"
+            android:layout_below="@+id/linearLayout"
+            android:layout_marginTop="11dp"
+            android:background="#EBEBEB"
+            android:id="@+id/linearLayout2">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="  帮助"
+                android:textSize="20dp" />
+
+
+        </LinearLayout>
+
+    <com.leon.lib.settingview.LSettingItem
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        leon:leftText="        使用帮助"
+        android:layout_below="@+id/linearLayout2"
+
+        android:id="@+id/LSettingItem1">
+
+    </com.leon.lib.settingview.LSettingItem>
+
+    <com.leon.lib.settingview.LSettingItem
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:id="@+id/LSettingItem2"
+
+        android:layout_below="@+id/LSettingItem1"
+        leon:leftText="        用户指南">
+
+    </com.leon.lib.settingview.LSettingItem>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_below="@id/LSettingItem2"
+        android:layout_marginTop="11dp"
+        android:background="#EBEBEB"
+        android:id="@+id/linearLayout3">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="  客服"
+            android:textSize="20dp" />
+
+
+    </LinearLayout>
+    <com.leon.lib.settingview.LSettingItem
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        leon:leftText="        客服QQ:123456789"
+        android:layout_below="@+id/linearLayout3"
+
+        android:id="@+id/LSettingItem4">
+    </com.leon.lib.settingview.LSettingItem>
+    <com.leon.lib.settingview.LSettingItem
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        leon:leftText="        客服电话：49060590657"
+        android:layout_below="@id/LSettingItem4"
+
+        android:id="@+id/LSettingItem5">
+    </com.leon.lib.settingview.LSettingItem>
+
+
+
+
+</RelativeLayout>

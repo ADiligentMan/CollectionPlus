@@ -42,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        //初始化SharedPreference ,其生命周期同应用进程，不会随activity的销毁而销毁。
-        SharedHelper.getInstance().initShared(getApplicationContext());
-        SharedHelper.getInstance().setValue("username", "wangpeng");
         mainVM = new MainVM(getApplicationContext());
 
         initToolbar();
