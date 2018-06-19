@@ -109,7 +109,7 @@ public class AddVM implements AddLoadListener<SimpleDirBean>{
             entity.setSource("QQ");
             entity.setTitle(binding.etTitle.getText().toString());
             entity.setType("计算机");
-            entity.setTime(TimeHelper.getFormatedTime(new Date()));
+            entity.setTime(TimeHelper.getFormatedTime(new Date(),1));
         }
 
         model.saveData(entity,this);
